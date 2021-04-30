@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+{% load static %}
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+  <title>Closet</title>
+  <meta name="theme-color" content="#FFCA0F">
+  <link rel="icon" type="image/png" sizes="1024x1024" href="Drip.png">
+  <link rel="icon" type="image/png" sizes="1024x1024" href="Drip.png">
+  <link rel="icon" type="image/png" sizes="1024x1024" href="Drip.png">
+  <link rel="icon" type="image/png" sizes="1024x1024" href="Drip.png">
+  <link rel="icon" type="image/png" sizes="1024x1024" href="Drip.png">
+  <link rel="stylesheet" href="{% static 'bootstrap/css/bootstrap.min.css' %}">
+  <link rel="stylesheet" href="{static 'fonts/font-awesome.min.css'}">
+  <link rel="stylesheet" href="{% static 'fonts/material-icons.min.css' %}">
+  <link rel="stylesheet" href="{% static 'css/main.css' %}">
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+</head>
+
+<body>
+  <div class="row" style="margin-left: 0px;margin-right: 0px;">
+    <div class="col-2 offset-1" style="width: 40px;height: 40px;margin-top: 20px;margin-left: 8px;"><img src="{% static 'images/when you see this send it to me 1@2x.png' %}" style="width: 70px;"></div>
+    <div class="col-3" style="width: 120px;height: 70px;margin-top: 20px;">
+      <h6>Kuku69</h6>
+      <p style="margin-bottom: 0px;color: #6F6F6F;">Moshood</p>
+    </div>
+    <div class="col-1 offset-2" style="height: 20px;padding-left: 0px;padding-right: 0px;margin-top: 20px;margin-left: 150px;width: 15px;"><i class="fa fa-ellipsis-v" style="padding-left: 15px;padding-right: 15px;"></i></div>
+  </div>
+  <div style="margin-top: 10px;">
+    <ul class="nav nav-tabs nav-fill">
+      <li class="nav-item"><a class="nav-link active" role="tab" data-toggle="tab" href="#tab-1">Items</a></li>
+      <li class="nav-item"><a class="nav-link" role="tab" data-toggle="tab" href="#tab-2">Outfits</a></li>
+    </ul>
+    <div class="tab-content">
+      <div class="tab-pane active" role="tabpanel" id="tab-1">
+        <div class="row text-center" style="margin-left: 0px;margin-right: 0px;">
+          {% for photo in photos %}
+          <div class="col-4" style="padding: 3px;padding-top: 3px;"><a href="{% url 'photo' photo.id %}"><img class="img-fluid" src="{{photo.image.url}}"></a></div>
+          {% empty %}
+          <h1>NO PHOTOS here</h1>
+          {% endfor %}
+        </div>
+      </div>
+      <div class="tab-pane" role="tabpanel" id="tab-2">
+        <div class="row text-center" style="margin-left: 0px;margin-right: 0px;">
+          <div class="col-4" style="padding: 3px;padding-top: 3px;"><a href="#"><img class="img-fluid" src="628ee1358e83179fd882937e981c0e19.png"></a></div>
+          <div class="col-4" style="padding: 3px;padding-top: 3px;"><a href="#"><img class="img-fluid" src="holiday-outfit.png"></a></div>
+          <div class="col-4" style="padding: 3px;padding-top: 3px;"><a href="#"><img class="img-fluid" src="d4193de074a072ff8bf54ca3eb2d6603.png"></a></div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <nav class="nav1">
+    <a href="#" class="nav__link">
+      <i class="material-icons nav__icon">sort</i>
+    </a>
+
+    <a href="{% url 'search' %}" class="nav__link">
+      <i class="material-icons nav__icon">add_circle_outline</i>
+    </a>
+    <a href="{% url 'gallery' %}" class="nav__link nav__link--active">
+      <i class="material-icons nav__icon">door_sliding</i>
+    </a>
+  </nav>
+  <script src="{% static 'js/jquery-3.4.1.min.js' %}"></script>
+  <script src="{% static 'bootstrap/js/bootstrap.min.js' %}"></script>
+  <script id="bs-live-reload" data-sseport="49753" data-lastchange="1618248924800" src="{% static 'js/livereload.js' %}"></script>
+</body>
+
+</html>
