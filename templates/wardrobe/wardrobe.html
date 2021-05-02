@@ -12,7 +12,7 @@
   <link rel="icon" type="image/png" sizes="1024x1024" href="Drip.png">
   <link rel="icon" type="image/png" sizes="1024x1024" href="Drip.png">
   <link rel="stylesheet" href="{% static 'bootstrap/css/bootstrap.min.css' %}">
-  <link rel="stylesheet" href="{static 'fonts/font-awesome.min.css'}">
+  <link rel="stylesheet" href="{% static 'fonts/font-awesome.min.css' %}">
   <link rel="stylesheet" href="{% static 'fonts/material-icons.min.css' %}">
   <link rel="stylesheet" href="{% static 'css/main.css' %}">
   <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
@@ -22,8 +22,9 @@
   <div class="row" style="margin-left: 0px;margin-right: 0px;">
     <div class="col-2 offset-1" style="width: 40px;height: 40px;margin-top: 20px;margin-left: 8px;"><img src="{% static 'images/when you see this send it to me 1@2x.png' %}" style="width: 70px;"></div>
     <div class="col-3" style="width: 120px;height: 70px;margin-top: 20px;">
-      <h6>Kuku69</h6>
-      <p style="margin-bottom: 0px;color: #6F6F6F;">Moshood</p>
+      <h6>{{user.username}}</h6>
+      <p style="margin-bottom: 0px;color: #6F6F6F;">Thank you God</p>
+      <a href="{% url 'logout' %}">Logout</a>
     </div>
     <div class="col-1 offset-2" style="height: 20px;padding-left: 0px;padding-right: 0px;margin-top: 20px;margin-left: 150px;width: 15px;"><i class="fa fa-ellipsis-v" style="padding-left: 15px;padding-right: 15px;"></i></div>
   </div>
@@ -44,15 +45,17 @@
       </div>
       <div class="tab-pane" role="tabpanel" id="tab-2">
         <div class="row text-center" style="margin-left: 0px;margin-right: 0px;">
-          <div class="col-4" style="padding: 3px;padding-top: 3px;"><a href="#"><img class="img-fluid" src="#"></a></div>
-          <div class="col-4" style="padding: 3px;padding-top: 3px;"><a href="#"><img class="img-fluid" src="#"></a></div>
-          <div class="col-4" style="padding: 3px;padding-top: 3px;"><a href="#"><img class="img-fluid" src="#"></a></div>
+          {% for outfit in outfits %}
+          <div class="col-4" style="padding: 3px;padding-top: 3px;"><a href="{% url 'outfit_view' outfit.id %}"><img class="img-fluid" src="{% static 'images/when you see this send it to me 1@2x.png' %}"></a></div>
+          {% empty %}
+          <h3>NO OUTFITS HERE</h3
+          {% endfor %}
         </div>
       </div>
     </div>
   </div>
   <nav class="nav1">
-    <a href="#" class="nav__link">
+    <a href="{% url 'outfit_feed' %}" class="nav__link">
       <i class="material-icons nav__icon">sort</i>
     </a>
 

@@ -5,7 +5,7 @@ from .models import Photos, Category, Outfit
 
 
 class OutfitAdmin(admin.ModelAdmin):
-    change_form_template = 'admin/outfitview.html'
+    pass
 
 class PhotosAdmin(admin.ModelAdmin):
     list_display = ['admin_photo','description', 'category']

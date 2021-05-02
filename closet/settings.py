@@ -23,7 +23,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'h8042er0$gxk&w7vctyhx_sem8ic!j&&s*@ljey2nl*+1f8l@*'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
 ALLOWED_HOSTS = ['drip-fashion.herokuapp.com', '127.0.0.1']
 
@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
 
     'wardrobe.apps.WardrobeConfig',
+    'storages',
 ]
 
 MIDDLEWARE = [
@@ -130,6 +131,18 @@ STATICFILES_DIRS = [
     'static'
 ]
 
+LOGIN_REDIRECT_URL = 'gallery'
+
+LOGIN_URL = 'login'
 
 MEDIA_ROOT = BASE_DIR/'static/images'
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+
+
+AWS_QUERYSTRING_AUTH = False
+DEFAULT_FILE_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
+
+AWS_ACCESS_KEY_ID = 'AKIAVG4ZQKOYHC56SAQY'
+AWS_SECRET_ACCESS_KEY = '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'
+
+AWS_STORAGE_BUCKET_NAME = 'drip-closet'

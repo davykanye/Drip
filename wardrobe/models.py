@@ -1,4 +1,5 @@
 from django.db import models
+from django.contrib.auth.models import User
 from django.utils.safestring import mark_safe
 # Create your models here.
 
@@ -12,6 +13,7 @@ class Category(models.Model):
 #
 
 class Photos(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='Items', null=True)
     category = models.ForeignKey(Category, on_delete=models.SET_NULL, null=True, blank=True)
     image = models.ImageField(null=False, blank=False)
     description = models.CharField(max_length=200, blank=True)

@@ -1,6 +1,7 @@
 from django.shortcuts import render, redirect
 from wardrobe.models import Category, Photos, Outfit
 from django.shortcuts import (get_object_or_404, HttpResponseRedirect)
+from django.contrib.auth.decorators import login_required
 from django.urls import reverse
 import os
 import json
@@ -11,13 +12,14 @@ import random
 import math
 
 # Create your views here.
-
+@login_required
 def gallery(request):
+    user = request.user
     categories = Category.objects.all()
-    photos = Photos.objects.all()
+    photos = Photos.objects.filter(user=user)
     outfits = Outfit.objects.all()
 
-    context = {'categories': categories, 'photos': photos}
+    context = {'categories': categories, 'photos': photos, 'outfits': outfits, 'user': user}
     template_name = 'wardrobe/wardrobe.html'
     return render(request, template_name, context)
 
