@@ -4,50 +4,40 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
-    <title>single outfit</title>
+    <title>Home</title>
     <link rel="stylesheet" href="{% static 'bootstrap/css/bootstrap.min.css' %}">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Alegreya+Sans">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Alegreya+Sans+SC">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Allerta">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Allerta+Stencil">
     <link rel="stylesheet" href="{% static 'fonts/font-awesome.min.css' %}">
     <link rel="stylesheet" href="{% static 'fonts/ionicons.min.css' %}">
-    <link rel="stylesheet" href="{% static 'fonts/line-awesome.min.css' %}">
     <link rel="stylesheet" href="{% static 'fonts/material-icons.min.css' %}">
-    <link rel="stylesheet" href="{% static 'css/detail/styles.css' %}">
-    <link rel="stylesheet" href="{% static 'css/detail/grid.css' %}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Swiper/3.3.1/css/swiper.min.css">
+    <link rel="stylesheet" href="{% static 'css/styles.css' %}">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 </head>
 
 <body>
-    <div class="row" style="margin-right: 0px;margin-left: 0px;padding-left: 15px;padding-right: 15px;">
-        <div class="col-6 align-self-center" style="margin-bottom: 20px;margin-top: 20px;"><button class="btn text-dark border-dark" type="button"><a href="#" style="color: rgb(0,0,0);"><i class="icon ion-android-arrow-back"></i></a></button></div>
-        <div class="col-6 text-right align-self-center" style="margin-bottom: 20px;margin-top: 20px;"><button class="btn border-dark" type="button"><a href="#"><i class="la la-heart" style="color: rgb(0,0,0);"></i></a></button></div>
-        <div class="col-auto col-md-6 text-left m-auto" style="background-color: #ffffff;padding-left: 0px;margin-right: 0px;padding-right: 0px;width: 100%;border-radius: 30px;margin-left: 0px;margin-bottom: 0px;height: 50%;margin-top: 0px;padding-top: 15px;">
-            <div class="row justify-content-center align-items-center" style="margin-left: 0px;margin-right: 0px;height: 180px;">
-                <div class="col-6"><img class="img-fluid" src="assets/img/Twice-Bucket-Hat-Back_1024x1024.png"></div>
-                <div class="col-6"><img class="img-fluid" src="assets/img/bdefcbc72735f64db17f3250b1e64245.png"></div>
-                <div class="col-6"><img class="img-fluid" src="assets/img/download%20(1).png"></div>
-                <div class="col-6"><img class="img-fluid" src="assets/img/WhiteSneakers-Everlane.png"></div>
+    <div class="row aa" style="margin-left: 0px;margin-right: 0px;padding-right: 15px;padding-left: 15px;">
+        <div class="col-6 align-self-center"><button class="btn btn-sm text-left" type="button"><i class="icon ion-ios-arrow-back" style="font-size: 30px;"></i></button></div>
+        <div class="col text-right align-self-center"><button class="btn btn-sm text-right" type="button"><i class="fa fa-heart-o" style="font-size: 30px;"></i></button></div>
+        <div class="col-12 text-center" style="background-color: #eaeaeb;padding-top: 15px;padding-bottom: 15px;">
+            <div class="row" style="margin-right: 0px;margin-left: 0px;">
+                <div class="col-6"><img class="img-fluid" src="{% static 'img/Twice-Bucket-Hat-Back_1024x1024.png' %}"></div>
+                <div class="col-6"><img class="img-fluid" src="{% static 'bdefcbc72735f64db17f3250b1e64245.png' %}"></div>
+                <div class="col-6"><img class="img-fluid" src="{% static 'img/download%20(1).png' %}"></div>
+                <div class="col-6"><img class="img-fluid" src="{% static 'img/WhiteSneakers-Everlane.png' %}"></div>
             </div>
         </div>
-        <div class="col-12" style="margin-top: 13px;">
-            <p><strong>Items Used</strong></p>
-        </div>
-        <div class="col-3" style="background-color: #ffffff;padding-top: 10px;border-radius: 10px 0 0 10px;"><img class="img-fluid" src="assets/img/Twice-Bucket-Hat-Back_1024x1024.png">
-            <p>Bucket Hat</p>
-        </div>
-        <div class="col-3" style="background-color: #ffffff;padding-top: 10px;"><img class="img-fluid" src="assets/img/bdefcbc72735f64db17f3250b1e64245.png">
-            <p>Orange T-Shirt</p>
-        </div>
-        <div class="col-3" style="background-color: #ffffff;padding-top: 10px;"><img class="img-fluid" src="assets/img/download%20(1).png">
-            <p>Sweatpants</p>
-        </div>
-        <div class="col-3" style="background-color: #ffffff;padding-top: 10px;border-radius: 0px 10px 10px 0px;"><img class="img-fluid" src="assets/img/WhiteSneakers-Everlane.png">
-            <p>White Sneakers</p>
-        </div>
-        <div class="col-12" style="margin-top: 13px;">
-            <p style="font-size: 23px;"><strong>Bucket hat, Orange shirt, Black sweat pants with white sneakers.</strong></p>
-        </div>
-        <div class="col-12 text-center"><button class="btn text-center" type="button" style="background-color: #252525;color: rgb(255,255,255);width: 207px;padding-top: 12px;padding-bottom: 12px;">Use Outfit</button></div>
+        <div class="col-12 align-self-center">
+            <p>Grey Buck hat, Orange shirt, Black Sweatpants and white.</p><button class="btn" type="button" style="background-color: #252525;color: rgb(255,255,255);font-size: 20px;">Use Outfit</button></div>
     </div>
-    <script src="assets/js/jquery.min.js"></script>
-    <script src="assets/bootstrap/js/bootstrap.min.js"></script>
+    <script src="{% static 'js/jquery.min.js' %}"></script>
+    <script src="{% static 'bootstrap/js/bootstrap.min.js' %}"></script>
+    <script src="{% static 'js/disappear.js' %}"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Swiper/3.3.1/js/swiper.jquery.min.js"></script>
+    <script src="{% static 'js/Simple-Slider.js' %}"></script>
 </body>
 
 </html>

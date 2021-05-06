@@ -1,5 +1,5 @@
 from django.shortcuts import render, redirect
-from wardrobe.models import Category, Photos, Outfit
+from wardrobe.models import Category, Photos, Outfit, Occassion
 from django.shortcuts import (get_object_or_404, HttpResponseRedirect)
 from django.contrib.auth.decorators import login_required
 from django.urls import reverse
@@ -24,6 +24,7 @@ def gallery(request):
     return render(request, template_name, context)
 
 # adding clothe items
+@login_required
 def add_pic(request):
     categories = Category.objects.all()
 
@@ -50,6 +51,7 @@ def add_pic(request):
     return render(request, template_name, context)
 
 # viewing clothe items
+@login_required
 def detail(request, pk):
     photo = Photos.objects.get(id=pk)
     context = {'photo' : photo}
@@ -57,6 +59,7 @@ def detail(request, pk):
     return render(request, template_name, context)
 
 # editing clothe items
+@login_required
 def edit_pic(request, pk):
     categories = Category.objects.all()
     photo = Photos.objects.get(id=pk)
@@ -85,6 +88,7 @@ def edit_pic(request, pk):
 
 
 # deleting clothe items
+@login_required
 def delete(request, pk):
     photo = Photos.objects.get(id=pk)
 
@@ -96,6 +100,7 @@ def delete(request, pk):
 ################## OUTFITS SECTION ###############################
 
 # Creating Outfits
+@login_required
 def create_outfit(request):
     photos = Photos.objects.all()
 
@@ -121,14 +126,41 @@ def create_outfit(request):
 
     return render(request, template_name, context)
 
+@login_required
 def outfit_feed(request):
-    outfits = Outfit.objects.all()
-    items = Photos.objects.all()
+    user = request.user
+    items = Photos.objects.filter(user=user)
+    ######### FIlTERING BY STYLES ###########
+    occassions = Occassion.objects.all()
+    category = Category.objects.all()
+    event = request.GET.get('occassion')
+    if event == None:
+        pass
+    else:
+        pass
 
-    context = {'outfits': outfits}
+    ####### FIlTERING BY BODYPARTS ###########
+    head = items.filter(category__name='headwear')
+    top = items.filter(category__name='top')
+    jacket = items.filter(category__name='jacket')
+    lower = items.filter(category__name='lower')
+    shoes = items.filter(category__name='shoes')
+
+    outfits = []
+    for i in range(8):
+        outfit = {
+        head: random.choice(head),
+        top: random.choice(top),
+        lower: random.choice(lower),
+        shoes: random.choice(shoes)
+        }
+        outfits.append(outfit)
+
+    context = {'outfits': outfits, 'occassions':occassions, 'category':category}
     template_name = 'wardrobe/outfit_feed.html'
     return render(request, template_name, context)
 
+@login_required
 def outfit_view(request, pk):
     outfit = Outfit.objects.get(id=pk)
 
@@ -137,6 +169,7 @@ def outfit_view(request, pk):
     return render(request, template_name, context)
 
 ############# ADD ITEMS IN A SPECIAL WAY #####################
+@login_required
 def search(request):
 
     SAVE_FOLDER = 'static/images'

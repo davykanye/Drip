@@ -2,149 +2,106 @@
 <html>
 {% load static %}
 <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
-    <title>Home</title>
-    <link rel="stylesheet" href="{% static 'bootstrap/css/bootstrap.min.css' %}">
-    <link rel="stylesheet" href="{% static 'fonts/line-awesome.min.css' %}">
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Alegreya+Sans">
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Alegreya+Sans+SC">
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Allerta">
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Allerta+Stencil">
-    <link rel="stylesheet" href="{% static 'fonts/font-awesome.min.css' %}">
-    <link rel="stylesheet" href="{% static 'fonts/home/material-icons.min.css' %}">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Swiper/3.3.1/css/swiper.min.css">
-    <link rel="stylesheet" href="{% static 'css/style.css' %}">
-<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+  <title>Home</title>
+  <link rel="stylesheet" href="{% static 'bootstrap/css/bootstrap.min.css' %}">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Alegreya+Sans">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Alegreya+Sans+SC">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Allerta">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Allerta+Stencil">
+  <link rel="stylesheet" href="{% static 'fonts/font-awesome.min.css' %}">
+  <link rel="stylesheet" href="{% static 'fonts/ionicons.min.css' %}">
+  <link rel="stylesheet" href="{% static 'fonts/material-icons.min.css' %}">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Swiper/3.3.1/css/swiper.min.css">
+  <link rel="stylesheet" href="{% static 'css/styles.css' %}">
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 </head>
 
-<body style="background-color: #ebeaef;padding-right: 15px;padding-left: 15px;">
-    <div class="row text-center" style="margin: 0px;">
-        <div class="col-12" style="padding-right: 0px;padding-left: 0px;">
-            <p style="font-size: 30px;font-family: 'Alegreya Sans', sans-serif;"><strong>Drip</strong></p>
-        </div>
-        <div class="col-12" style="padding-right: 0px;padding-left: 0px;"><div class="box">
-
-	<i class="fa fa-search" aria-hidden="true"></i>
-
-	<input type="text" name="">
-
-</div></div>
-        <div class="col align-self-center" style="padding-right: 0px;padding-left: 0px;">
-            <div class="text-right" style="padding-top: 10px;padding-right: 15px;"><a class="btn btn-sm text-left" data-toggle="collapse" aria-expanded="false" aria-controls="collapse-1" href="#collapse-1" role="button" style="padding-right: 0px;padding-left: 0px;border-radius: 10px;background-color: rgba(255,189,19,0);padding-top: 0px;padding-bottom: 0px;">Filter</a>
-                <div
-                    class="collapse" id="collapse-1">
-                    <div class="row" style="margin-left: 0px;margin-right: 0px;">
-                        <div class="col-12" style="padding-left: 0px;padding-right: 0px;">
-                            <p class="text-left">Occassions</p>
-                        </div>
-                        <div class="col-3" style="padding-right: 0px;padding-left: 0px;">
-                            <div class="form-check"><input class="form-check-input" type="checkbox" id="formCheck-1"><label class="form-check-label" for="formCheck-1">Party</label></div>
-                        </div>
-                        <div class="col-3" style="padding-left: 0px;padding-right: 0px;">
-                            <div class="form-check"><input class="form-check-input" type="checkbox" id="formCheck-2"><label class="form-check-label" for="formCheck-2">Church</label></div>
-                        </div>
-                        <div class="col-3" style="padding-left: 0px;padding-right: 0px;">
-                            <div class="form-check"><input class="form-check-input" type="checkbox" id="formCheck-3"><label class="form-check-label" for="formCheck-3">Daily</label></div>
-                        </div>
-                        <div class="col-3" style="padding-right: 0px;padding-left: 0px;">
-                            <div class="form-check"><input class="form-check-input" type="checkbox" id="formCheck-4"><label class="form-check-label" for="formCheck-4">Outing</label></div>
-                        </div>
-                        <div class="col-12" style="padding-left: 0px;padding-right: 0px;">
-                            <p class="text-left">Weather</p>
-                        </div>
-                        <div class="col-6 text-left" style="padding-left: 0px;padding-right: 0px;">
-                            <div class="form-check"><input class="form-check-input" type="checkbox" id="formCheck-6"><label class="form-check-label" for="formCheck-6">Hot</label></div>
-                        </div>
-                        <div class="col-6" style="padding-left: 0px;padding-right: 0px;">
-                            <div class="form-check text-left"><input class="form-check-input" type="checkbox" id="formCheck-5"><label class="form-check-label" for="formCheck-5">Cold</label></div>
-                        </div>
-                    </div>
-            </div>
-        </div>
+<body>
+  <div class="row" style="margin-left: 0px;margin-right: 0px;margin-top: 20px;margin-bottom: 20px;padding-right: 15px;padding-left: 15px;">
+    <div class="col-2 text-right align-self-center" style="padding-right: 10px;padding-left: 0px;"><a href="#"><img src="{% static 'images/when you see this send it to me 1@2x.png' %}" style="width: 50px;"></a></div>
+    <div class="col-8 text-left align-self-center" style="padding-right: 0px;padding-left: 12px;">
+      <h1>Hi, <br>David</h1>
     </div>
-    </div>
-    <div class="text-center">
-        <div class="container text-center" style="padding-left: 0px;padding-right: 0px;margin-top: 20px;">
-            <div class="row text-center" style="margin-left: 0px;margin-right: 0px;margin-top: 10px;">
-                <div class="col-auto col-md-6 text-left m-auto" style="background-color: #ffffff;padding-left: 0px;margin-right: 0px;padding-right: 0px;width: 50%;border-radius: 20px;">
-                    <div class="row justify-content-center align-items-center" style="margin-left: 0px;margin-right: 0px;height: 180px;">
-                        <div class="col-6"><img class="img-fluid" src="assets/img/Twice-Bucket-Hat-Back_1024x1024.png"></div>
-                        <div class="col-6"><img class="img-fluid" src="assets/img/bdefcbc72735f64db17f3250b1e64245.png"></div>
-                        <div class="col-6"><img class="img-fluid" src="assets/img/download%20(1).png"></div>
-                        <div class="col-6"><img class="img-fluid" src="assets/img/WhiteSneakers-Everlane.png"></div>
-                        <div class="col-12 text-right"><button class="btn btn-sm text-right border rounded-circle" type="button" style="background-color: #000000;color: rgb(255,255,255);"><a href="#" style="color: rgb(255,255,255);"><i class="la la-heart-o"></i></a></button></div>
-                    </div>
-                </div>
-                <div class="col-auto col-md-6 text-right m-auto" style="background-color: #ffffff;padding-right: 0px;padding-left: 0px;width: 48%;border-radius: 20px;">
-                    <div class="row justify-content-center align-items-center" style="margin-left: 0px;margin-right: 0px;height: 180px;">
-                        <div class="col-6"><img class="img-fluid" src="assets/img/Twice-Bucket-Hat-Back_1024x1024.png"></div>
-                        <div class="col-6"><img class="img-fluid" src="assets/img/bdefcbc72735f64db17f3250b1e64245.png"></div>
-                        <div class="col-6"><img class="img-fluid" src="assets/img/download%20(1).png"></div>
-                        <div class="col-6"><img class="img-fluid" src="assets/img/WhiteSneakers-Everlane.png"></div>
-                        <div class="col-12 text-right"><button class="btn btn-sm text-right border rounded-circle" type="button" style="background-color: #000000;color: rgb(255,255,255);"><a href="#" style="color: rgb(255,255,255);"><i class="la la-heart-o"></i></a></button></div>
-                    </div>
-                </div>
+    <div class="col-1 text-right align-self-center">
+      <div><a class="btn btn-sm" role="button" data-toggle="modal" href="#myModal" style="font-size: 40px;"><i class="icon ion-android-more-vertical"></i></a>
+        <div class="modal fade" role="dialog" tabindex="-1" id="myModal">
+          <div class="modal-dialog" role="document">
+            <div class="modal-content">
+              <div class="modal-header"><button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button></div>
+              <div class="modal-body">
+                <p class="text-center text-muted"><i class="fa fa-user-o"></i>&nbsp; Profile&nbsp;&nbsp;</p>
+                <p class="text-center text-muted"><i class="fa fa-heart-o"></i>&nbsp; Favorites</p>
+                <p class="text-center text-muted"><i class="icon ion-log-out"></i>&nbsp; Logout&nbsp;&nbsp;</p>
+              </div>
             </div>
-            <div class="row text-center" style="margin-left: 0px;margin-right: 0px;margin-top: 10px;">
-                <div class="col-auto col-md-6 text-left m-auto" style="background-color: #ffffff;padding-left: 0px;margin-right: 0px;padding-right: 0px;width: 50%;border-radius: 20px;">
-                    <div class="row justify-content-center align-items-center" style="margin-left: 0px;margin-right: 0px;height: 180px;">
-                        <div class="col-6"><img class="img-fluid" src="assets/img/Twice-Bucket-Hat-Back_1024x1024.png"></div>
-                        <div class="col-6"><img class="img-fluid" src="assets/img/bdefcbc72735f64db17f3250b1e64245.png"></div>
-                        <div class="col-6"><img class="img-fluid" src="assets/img/download%20(1).png"></div>
-                        <div class="col-6"><img class="img-fluid" src="assets/img/WhiteSneakers-Everlane.png"></div>
-                        <div class="col-12 text-right"><button class="btn btn-sm text-right border rounded-circle" type="button" style="background-color: #000000;color: rgb(255,255,255);"><a href="#" style="color: rgb(255,255,255);"><i class="la la-heart-o"></i></a></button></div>
-                    </div>
-                </div>
-                <div class="col-auto col-md-6 text-right m-auto" style="background-color: #ffffff;padding-right: 0px;padding-left: 0px;width: 48%;border-radius: 20px;">
-                    <div class="row justify-content-center align-items-center" style="margin-left: 0px;margin-right: 0px;height: 180px;">
-                        <div class="col-6"><img class="img-fluid" src="assets/img/Twice-Bucket-Hat-Back_1024x1024.png"></div>
-                        <div class="col-6"><img class="img-fluid" src="assets/img/bdefcbc72735f64db17f3250b1e64245.png"></div>
-                        <div class="col-6"><img class="img-fluid" src="assets/img/download%20(1).png"></div>
-                        <div class="col-6"><img class="img-fluid" src="assets/img/WhiteSneakers-Everlane.png"></div>
-                        <div class="col-12 text-right"><button class="btn btn-sm text-right border rounded-circle" type="button" style="background-color: #000000;color: rgb(255,255,255);"><a href="#" style="color: rgb(255,255,255);"><i class="la la-heart-o"></i></a></button></div>
-                    </div>
-                </div>
-            </div>
-            <div class="row text-center" style="margin-left: 0px;margin-right: 0px;margin-top: 10px;">
-                <div class="col-auto col-md-6 text-left m-auto" style="background-color: #ffffff;padding-left: 0px;margin-right: 0px;padding-right: 0px;width: 50%;border-radius: 20px;">
-                    <div class="row justify-content-center align-items-center" style="margin-left: 0px;margin-right: 0px;height: 180px;">
-                        <div class="col-6"><img class="img-fluid" src="assets/img/Twice-Bucket-Hat-Back_1024x1024.png"></div>
-                        <div class="col-6"><img class="img-fluid" src="assets/img/bdefcbc72735f64db17f3250b1e64245.png"></div>
-                        <div class="col-6"><img class="img-fluid" src="assets/img/download%20(1).png"></div>
-                        <div class="col-6"><img class="img-fluid" src="assets/img/WhiteSneakers-Everlane.png"></div>
-                        <div class="col-12 text-right"><button class="btn btn-sm text-right border rounded-circle" type="button" style="background-color: #000000;color: rgb(255,255,255);"><a href="#" style="color: rgb(255,255,255);"><i class="la la-heart-o"></i></a></button></div>
-                    </div>
-                </div>
-                <div class="col-auto col-md-6 text-right m-auto" style="background-color: #ffffff;padding-right: 0px;padding-left: 0px;width: 48%;border-radius: 20px;">
-                    <div class="row justify-content-center align-items-center" style="margin-left: 0px;margin-right: 0px;height: 180px;">
-                        <div class="col-6"><img class="img-fluid" src="assets/img/Twice-Bucket-Hat-Back_1024x1024.png"></div>
-                        <div class="col-6"><img class="img-fluid" src="assets/img/bdefcbc72735f64db17f3250b1e64245.png"></div>
-                        <div class="col-6"><img class="img-fluid" src="assets/img/download%20(1).png"></div>
-                        <div class="col-6"><img class="img-fluid" src="assets/img/WhiteSneakers-Everlane.png"></div>
-                        <div class="col-12 text-right"><button class="btn btn-sm text-right border rounded-circle" type="button" style="background-color: #000000;color: rgb(255,255,255);"><a href="#" style="color: rgb(255,255,255);"><i class="la la-heart-o"></i></a></button></div>
-                    </div>
-                </div>
-            </div>
+          </div>
         </div>
+      </div>
     </div>
-    <div class="col text-center" style="padding-left: 0px;padding-right: 0px;margin-right: -15px;margin-left: -15px;"><nav class="nav">
-  <a href="#" class="nav__link">
-    <i class="material-icons nav__icon">home</i>
-  </a>
-  <a href="#" class="nav__link nav__link--active">
-    <i class="material-icons nav__icon">grid_view</i>
+  </div>
+  <div class="row" style="margin-right: 0px;margin-left: 0px;">
+    <div class="col-12"><input type="text" style="padding-bottom: 0px;padding-top: 0px;margin-top: 0px;padding-left: 15px;" placeholder="Search"></div>
+    <div class="col" style="margin-bottom: 18px;">
+      <div class="text-right" style="padding-top: 10px;padding-right: 15px;"><a class="btn btn-sm text-left" data-toggle="collapse" aria-expanded="false" aria-controls="collapse-1" href="#collapse-1" role="button"
+          style="padding-right: 0px;padding-left: 0px;border-radius: 10px;background-color: rgba(255,189,19,0);padding-top: 0px;padding-bottom: 0px;">Filter</a>
+        <div class="collapse" id="collapse-1">
+          <div class="row" style="margin-right: 0px;margin-left: 0px;">
+            <div class="col-12">
+              <p class="text-left">Occassion</p>
+            </div>
+            {% for occassion in occassions %}
+            <div class="col-3">
+              <a href="{% url 'outfit_feed' %}?occassion={{occassion.name}}">
+                <p>{{occassion.name}}</p>
+              </a>
+            </div>
+            {% empty %}
+            <h3>This is impossible</h3>
+            {% endfor %}
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
 
-  <a href="#" class="nav__link">
-    <span class="material-icons">
-door_sliding
-</span>
-  </a>
-</nav></div>
-    <script src="{% static 'js/jquery.min.js' %}"></script>
-    <script src="{% static 'bootstrap/js/bootstrap.min.js' %}"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/Swiper/3.3.1/js/swiper.jquery.min.js"></script>
-    <script src="{% static 'js/Simple-Slider.min.js' %}"></script>
+  <div class="row" style="margin-right: 0px;margin-left: 0px;margin-top: 10px;margin-bottom: 10px;padding: 20px;">
+    {% for outfit in outfits %}
+    <div class="col-6" style="padding-right: 5px;padding-left: 15px;">
+      <div class="row hh" style="margin-left: 0px;margin-right: 0px;background-color: #eaeaeb;padding-top: 8px;padding-right: 8px;padding-bottom: 8px;padding-left: 8px;">
+        {% for key, value in outfit.items %}
+          <div class="col-6 text-center"><img class="img-fluid" src="{{value.image.url}}"></div>
+        {% endfor %}
+      </div>
+    </div>
+
+    {% empty %}
+    <center><h1>U are nothing</h1></center>
+    {% endfor %}
+  </div>
+
+
+  <div class="col" style="padding-right: 0px;padding-left: 0px;">
+    <nav class="nav">
+      <a href="#" class="nav__link">
+        <i class="material-icons nav__icon">home</i>
+      </a>
+      <a href="#" class="nav__link nav__link--active">
+        <i class="material-icons nav__icon">grid_view</i>
+      </a>
+      <a href="#" class="nav__link">
+        <span class="material-icons">
+          door_sliding
+        </span>
+      </a>
+    </nav>
+  </div>
+  <script src="{% static 'js/jquery.min.js' %}"></script>
+  <script src="{% static 'bootstrap/js/bootstrap.min.js' %}"></script>
+  <script src="{% static 'js/disappear.js' %}"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/Swiper/3.3.1/js/swiper.jquery.min.js"></script>
+  <script src="{% static 'js/Simple-Slider.js' %}"></script>
 </body>
 
 </html>

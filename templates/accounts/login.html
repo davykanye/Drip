@@ -1,29 +1,49 @@
 <!DOCTYPE html>
-<html lang="en" dir="ltr">
-  <head>
-    <meta charset="utf-8">
-    <title>Login</title>
-  </head>
-  <body>
-    <div class="login_form">
-      <center>
-        <div class="container">
-          <form action="login" method="POST">
-            {% csrf_token %}
+<html>
+{% load static %}
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+  <title>Home</title>
+  <link rel="stylesheet" href="{% static 'bootstrap/css/bootstrap.min.css' %}">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Alegreya+Sans">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Alegreya+Sans+SC">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Allerta">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Allerta+Stencil">
+  <link rel="stylesheet" href="{% static 'fonts/font-awesome.min.css' %}">
+  <link rel="stylesheet" href="{% static 'fonts/ionicons.min.css' %}">
+  <link rel="stylesheet" href="{% static 'fonts/material-icons.min.css' %}">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Swiper/3.3.1/css/swiper.min.css">
+  <link rel="stylesheet" href="{% static 'css/styles.css' %}">
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+</head>
 
-            <div class="form-group m-3">
-              <input type="text" name="username" value="" placeholder="Username">
-            </div>
-
-            <div class="form-group m-3">
-              <input type="password" name="password" placeholder="Password">
-            </div>
-
-            <button type="submit" name="button" class="btn btn-primary m-3">Submit</button>
-          </form>
-        </div>
-      </center>
-
+<body>
+  <div class="row yy" style="margin-left: 0px;margin-right: 0px;">
+    <div class="col-12 align-self-end"><img src="{% static 'img/92008983-d1500580-ed15-11ea-9cdd-5e46129936f9.png' %}" style="width: 20px;"></div>
+    <div class="col-12 align-self-end">
+      <h1>Login</h1>
     </div>
-  </body>
+    <div class="col-12 align-self-center">
+      <p>Don't have an account? <a href="{% url 'register' %}"><strong>Sign up</strong></a></p>
+    </div>
+
+  <div class="col-12 align-self-center">
+    <form action="login" method="POST">
+      {% csrf_token %}
+      <div class="col-12"><input type="text" name='username' placeholder="Username/Email" style="padding-left: 15px;"><input type="text" name='password' placeholder="Password" style="padding-left: 15px;">
+        <p style="margin-bottom: 0px;margin-top: 18px;">Forgot Password?</p>
+      </div>
+      <div class="col-12 align-self-start"><button class="btn btn-primary" type="submit" style="background-color: rgb(37,37,37);font-size: 20px;">Login</button></div>
+    </form>
+  </div>
+
+  </div>
+  <script src="{% static 'js/jquery.min.js' %}"></script>
+  <script src="{% static 'bootstrap/js/bootstrap.min.js' %}"></script>
+  <script src="{% static 'js/disappear.js' %}"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/Swiper/3.3.1/js/swiper.jquery.min.js"></script>
+  <script src="{% static 'js/Simple-Slider.js' %}"></script>
+</body>
+
 </html>

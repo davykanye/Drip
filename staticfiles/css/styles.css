@@ -1,4 +1,5 @@
 .col-6 {
+  padding: 20px;
   border-radius: 10px;
 }
 
@@ -272,3 +273,55 @@ body {
   font-size: 18px;
 }
 
+button, input {
+  height: 55px;
+  outline: none;
+  width: 100%;
+  background-color: #eaeaeb;
+  margin-top: 20px;
+  border: none;
+  border-radius: 15px;
+}
+
+[type=button]:not(:disabled), [type=reset]:not(:disabled), [type=submit]:not(:disabled), button:not(:disabled) {
+  border-radius: 20px;
+}
+
+.row.gg {
+  height: 100vh;
+}
+
+.row.yy {
+  height: 100vh;
+}
+
+[type=button]:not(:disabled), [type=reset]:not(:disabled), [type=submit]:not(:disabled), button:not(:disabled) {
+  border-radius: 20px;
+}
+
+[type=button]:not(:disabled), [type=reset]:not(:disabled), [type=submit]:not(:disabled), button:not(:disabled) {
+}
+
+.row.hh {
+  border-radius: 10px;
+}
+
+.row.aa {
+  height: 90vh;
+}
+
+.col-12.text-center {
+  border-radius: 20px;
+}
+
+.col-12.hh {
+  height: 80vh;
+}
+
+.products.productOne div label input [type="checkbox"] {
+  display: none;
+}
+
+.products.productTwo div label input [type="checkbox"] {
+  display: none;
+}
