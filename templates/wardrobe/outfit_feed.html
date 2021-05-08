@@ -80,23 +80,8 @@
     <center><h1>U are nothing</h1></center>
     {% endfor %}
   </div>
+    {% include 'wardrobe/bottom_nav.html' %}
 
-
-  <div class="col" style="padding-right: 0px;padding-left: 0px;">
-    <nav class="nav">
-      <a href="#" class="nav__link">
-        <i class="material-icons nav__icon">home</i>
-      </a>
-      <a href="#" class="nav__link nav__link--active">
-        <i class="material-icons nav__icon">grid_view</i>
-      </a>
-      <a href="#" class="nav__link">
-        <span class="material-icons">
-          door_sliding
-        </span>
-      </a>
-    </nav>
-  </div>
   <script src="{% static 'js/jquery.min.js' %}"></script>
   <script src="{% static 'bootstrap/js/bootstrap.min.js' %}"></script>
   <script src="{% static 'js/disappear.js' %}"></script>

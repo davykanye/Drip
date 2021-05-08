@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+{% load static %}
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+  </head>
+  <body>
+    <nav class="nav1">
+      <a href="{% url 'outfit_feed' %}" class="nav__link">
+        <i class="material-icons nav__icon">sort</i>
+      </a>
+
+      <a href="{% url 'search' %}" class="nav__link">
+        <i class="material-icons nav__icon">add_circle_outline</i>
+      </a>
+      <a href="{% url 'gallery' %}" class="nav__link nav__link--active">
+        <i class="material-icons nav__icon">door_sliding</i>
+      </a>
+    </nav>
+
+  </body>
+</html>

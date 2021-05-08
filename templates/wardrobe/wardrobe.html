@@ -53,18 +53,9 @@
       </div>
     </div>
   </div>
-  <nav class="nav1">
-    <a href="{% url 'outfit_feed' %}" class="nav__link">
-      <i class="material-icons nav__icon">sort</i>
-    </a>
 
-    <a href="{% url 'search' %}" class="nav__link">
-      <i class="material-icons nav__icon">add_circle_outline</i>
-    </a>
-    <a href="{% url 'gallery' %}" class="nav__link nav__link--active">
-      <i class="material-icons nav__icon">door_sliding</i>
-    </a>
-  </nav>
+    {% include 'wardrobe/bottom_nav.html' %}
+
   <script src="{% static 'js/jquery-3.4.1.min.js' %}"></script>
   <script src="{% static 'bootstrap/js/bootstrap.min.js' %}"></script>
   <script id="bs-live-reload" data-sseport="49753" data-lastchange="1618248924800" src="{% static 'js/livereload.js' %}"></script>

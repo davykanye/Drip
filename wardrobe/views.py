@@ -134,10 +134,13 @@ def outfit_feed(request):
     occassions = Occassion.objects.all()
     category = Category.objects.all()
     event = request.GET.get('occassion')
+    print(event)
     if event == None:
         pass
     else:
-        pass
+        event = Occassion.objects.get(name=str(event))
+        styles = event.styles.all()
+        print(styles)
 
     ####### FIlTERING BY BODYPARTS ###########
     head = items.filter(category__name='headwear')
@@ -146,7 +149,9 @@ def outfit_feed(request):
     lower = items.filter(category__name='lower')
     shoes = items.filter(category__name='shoes')
 
+#  ############# PERMUTATING THE OUTFITS PROPERLY ###################
     outfits = []
+
     for i in range(8):
         outfit = {
         head: random.choice(head),
@@ -171,6 +176,12 @@ def outfit_view(request, pk):
 ############# ADD ITEMS IN A SPECIAL WAY #####################
 @login_required
 def search(request):
+    if request.method == 'POST':
+        query = request.POST['query']
+        query = '+'.join(query.split())
+        print(query)
+    else:
+        query = 'clothes'
 
     SAVE_FOLDER = 'static/images'
 
@@ -186,7 +197,6 @@ def search(request):
     'Connection': 'keep-alive',
 }
 
-    query = 'black+shirt'
 
     search = GOOGLE_IMAGE + "q=" + query
     html = requests.get(search, headers=usr_agent)
@@ -199,26 +209,38 @@ def search(request):
     for img in results:
         link = img['src']
         links.append(link)
-
-    if request.method == 'POST':
-        data = request.POST
-        selected_clothes = request.POST.getlist('clothe')
-
-        for i, imagelink in enumerate(selected_clothes):
-            response = requests.get(imagelink)
-
-            imagename = SAVE_FOLDER + '/' + query + str(i+1) + '.jpg'
-            with open(imagename, 'wb') as file:
-                file.write(response.content)
-
-            photo = Photos.objects.create(
-                description='clothe engine test',
-                image=imagename,
-            )
-        return redirect('gallery')
+    links.pop(0)
 
 
-    context = {'images': links}
+    try:
+        image_picked = request.GET.get('image')
+        response = requests.get(image_picked)
+        print(image_picked)
+    except:
+        pass
+
+    # if request.method == 'POST':
+    #     data = request.POST
+    #     selected_clothes = request.POST.getlist('clothe')
+    #
+    #     for i, imagelink in enumerate(selected_clothes):
+    #         response = requests.get(imagelink)
+    #
+    #         imagename = SAVE_FOLDER + '/' + query + str(i+1) + '.jpg'
+    #         with open(imagename, 'wb') as file:
+    #             file.write(response.content)
+    #
+    #         photo = Photos.objects.create(
+    #             description='clothe engine test',
+    #             image=imagename,
+    #         )
+    #     return redirect('gallery')
+
+    description = query.split('+')
+    description = ' '.join(description)
+
+
+    context = {'images': links, 'query': description}
     template_name = 'wardrobe/search_item.html'
 
     return render(request, template_name, context)
