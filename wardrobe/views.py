@@ -1,5 +1,5 @@
 from django.shortcuts import render, redirect
-from wardrobe.models import Category, Photos, Outfit, Occassion
+from wardrobe.models import Category, Style, Photos, Outfit, Occassion
 from django.shortcuts import (get_object_or_404, HttpResponseRedirect)
 from django.contrib.auth.decorators import login_required
 from django.urls import reverse
@@ -126,6 +126,10 @@ def create_outfit(request):
 
     return render(request, template_name, context)
 
+
+# ################These were the two hardest views in the entire MVP###########
+
+########### THE OUTFIT_FEED #################
 @login_required
 def outfit_feed(request):
     user = request.user
@@ -134,15 +138,14 @@ def outfit_feed(request):
     occassions = Occassion.objects.all()
     category = Category.objects.all()
     event = request.GET.get('occassion')
-    print(event)
     if event == None:
         pass
     else:
         event = Occassion.objects.get(name=str(event))
         styles = event.styles.all()
-        print(styles)
 
-    ####### FIlTERING BY BODYPARTS ###########
+        items = items.filter(style__name__in=list(styles))
+        print(items)
     head = items.filter(category__name='headwear')
     top = items.filter(category__name='top')
     jacket = items.filter(category__name='jacket')
@@ -183,7 +186,7 @@ def search(request):
     else:
         query = 'clothes'
 
-    SAVE_FOLDER = 'static/images'
+    SAVE_FOLDER = ''
 
     GOOGLE_IMAGE = \
     'https://www.google.com/search?site=&tbm=isch&source=hp&biw=1873&bih=990&'
@@ -215,8 +218,25 @@ def search(request):
     try:
         image_picked = request.GET.get('image')
         response = requests.get(image_picked)
-        print(image_picked)
-    except:
+        imagename = query + '.jpg'
+        with open(imagename, 'wb') as file:
+            file.write(response.content)
+
+        category = Category.objects.get(name='top')
+        style = Style.objects.all()
+
+        photo = Photos.objects.create(
+            user = request.user,
+            category = category,
+            image=imagename,
+        )
+
+        photo.save()
+
+        photo.style.set(style)
+
+    except Exception as e:
+        print(e)
         pass
 
     # if request.method == 'POST':
@@ -231,8 +251,8 @@ def search(request):
     #             file.write(response.content)
     #
     #         photo = Photos.objects.create(
-    #             description='clothe engine test',
-    #             image=imagename,
+                # description='clothe engine test',
+                # image=imagename,
     #         )
     #     return redirect('gallery')
 

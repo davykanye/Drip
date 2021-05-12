@@ -1,64 +1,85 @@
 <!DOCTYPE html>
 <html>
 {% load static %}
+
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
-  <title>Closet</title>
-  <meta name="theme-color" content="#FFCA0F">
-  <link rel="icon" type="image/png" sizes="1024x1024" href="Drip.png">
-  <link rel="icon" type="image/png" sizes="1024x1024" href="Drip.png">
-  <link rel="icon" type="image/png" sizes="1024x1024" href="Drip.png">
-  <link rel="icon" type="image/png" sizes="1024x1024" href="Drip.png">
-  <link rel="icon" type="image/png" sizes="1024x1024" href="Drip.png">
+  <title>Home</title>
   <link rel="stylesheet" href="{% static 'bootstrap/css/bootstrap.min.css' %}">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Alegreya+Sans">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Alegreya+Sans+SC">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Allerta">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Allerta+Stencil">
+  <link rel="stylesheet" href="{% static 'fonts/fontawesome-all.min.css' %}">
   <link rel="stylesheet" href="{% static 'fonts/font-awesome.min.css' %}">
+  <link rel="stylesheet" href="{% static 'fonts/ionicons.min.css' %}">
   <link rel="stylesheet" href="{% static 'fonts/material-icons.min.css' %}">
-  <link rel="stylesheet" href="{% static 'css/main.css' %}">
+  <link rel="stylesheet" href="{% static 'fonts/fontawesome5-overrides.min.css' %}">
+  <link rel="stylesheet" href="{% static 'css/buttom-navigation-1.css' %}">
+  <link rel="stylesheet" href="{% static 'css/buttom-navigation.css' %}">
+  <link rel="stylesheet" href="{% static 'css/styles.css' %}">
   <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 </head>
 
 <body>
-  <div class="row" style="margin-left: 0px;margin-right: 0px;">
-
-    <div class="col-6" style="width: 120px;height: 70px;margin-top: 20px;">
-      <h6>{{user.username}}</h6>
-      <a href="{% url 'logout' %}">Logout</a>
+  <div class="row" style="margin-left: 0px;margin-right: 0px;padding-right: 15px;padding-left: 15px;margin-top: 20px;">
+    <div class="col-3 text-center align-self-center" style="padding-left: 0px;padding-right: 0px;"><i class="far fa-user-circle" style="font-size: 60px;"></i></div>
+    <div class="col-5 text-left align-self-center" style="padding-left: 0px;">
+      <p class="text-left" style="margin-bottom: 0px;"><strong>{{user.username}}</strong><br>biography</p>
     </div>
-    <div class="col-1 offset-2" style="height: 20px;padding-left: 0px;padding-right: 0px;margin-top: 20px;margin-left: 150px;width: 15px;"><i class="fa fa-ellipsis-v" style="padding-left: 15px;padding-right: 15px;"></i></div>
-  </div>
-  <div style="margin-top: 10px;">
-    <ul class="nav nav-tabs nav-fill">
-      <li class="nav-item"><a class="nav-link active" role="tab" data-toggle="tab" href="#tab-1">Items</a></li>
-      <li class="nav-item"><a class="nav-link" role="tab" data-toggle="tab" href="#tab-2">Outfits</a></li>
-    </ul>
-    <div class="tab-content">
-      <div class="tab-pane active" role="tabpanel" id="tab-1">
-        <div class="row text-center" style="margin-left: 0px;margin-right: 0px;">
-          {% for photo in photos %}
-          <div class="col-4" style="padding: 3px;padding-top: 3px;"><a href="{% url 'photo' photo.id %}"><img class="img-fluid" src="{{photo.image.url}}"></a></div>
-          {% empty %}
-          <h1>NO PHOTOS here</h1>
-          {% endfor %}
+    <!-- <div class="col-5 align-self-center" style="padding-right: 0px;padding-left: 0px;">
+      <div class="text-right"><a class="btn btn-lg" role="button" data-toggle="modal" href="#myModal" style="font-size: 40px;"><i class="icon ion-android-more-vertical"></i></a>
+        <div class="modal fade" role="dialog" tabindex="-1" id="myModal">
+          <div class="modal-dialog" role="document">
+            <div class="modal-content">
+              <div class="modal-header"><button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button></div>
+              <div class="modal-body">
+                <p class="text-center text-muted"><i class="icon ion-log-out"></i>&nbsp; Logout</p>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
-      <div class="tab-pane" role="tabpanel" id="tab-2">
-        <div class="row text-center" style="margin-left: 0px;margin-right: 0px;">
-          {% for outfit in outfits %}
-          <div class="col-4" style="padding: 3px;padding-top: 3px;"><a href="{% url 'outfit_view' outfit.id %}"><img class="img-fluid" src="{% static 'images/when you see this send it to me 1@2x.png' %}"></a></div>
-          {% empty %}
-          <h3>NO OUTFITS HERE</h3
-          {% endfor %}
+    </div> -->
+    {% include 'wardrobe/side_bar.html' %}
+  </div>
+
+  <div class="row">
+    <div class="col" style="padding-right: 0px;padding-left: 0px;">
+      <div>
+        <ul class="nav nav-tabs" style="margin-top: 20px;padding-bottom: 16px;">
+          <li class="nav-item"><a class="nav-link active text-center" role="tab" data-toggle="tab" href="#tab-1">Item</a></li>
+          <li class="nav-item" style="margin-bottom: 0px;"><a class="nav-link" role="tab" data-toggle="tab" href="#tab-2" style="color: #F19A3E;">Outfits</a></li>
+        </ul>
+        <div class="tab-content">
+          <div class="tab-pane fade show active" role="tabpanel" id="tab-1">
+            <div class="row" style="margin-right: 0px;margin-left: 0px;padding-top: 10px;padding-bottom: 3px;">
+              {% for photo in photos %}
+              <div class="col-4" style="padding-right: 3px;padding-left: 3px;">
+                <a href="{% url 'photo' photo.id %}"><img src="{{photo.image.url}}"></a>
+              </div>
+              {% empty %}
+              <center>
+                <h3>Jesus Christ</h3>
+              </center>
+              {% endfor %}
+            </div>
+
+          </div>
+
         </div>
       </div>
     </div>
   </div>
 
-    {% include 'wardrobe/bottom_nav.html' %}
+  {% include 'wardrobe/bottom_nav.html' %}
 
-  <script src="{% static 'js/jquery-3.4.1.min.js' %}"></script>
+  <script src="{% static 'js/jquery.min.js' %}"></script>
   <script src="{% static 'bootstrap/js/bootstrap.min.js' %}"></script>
-  <script id="bs-live-reload" data-sseport="49753" data-lastchange="1618248924800" src="{% static 'js/livereload.js' %}"></script>
+  <script src="{% static 'js/disappear.js' %}"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/Swiper/3.3.1/js/swiper.jquery.min.js"></script>
+  <script src="{% static 'js/Simple-Slider.js' %}"></script>
 </body>
 
 </html>

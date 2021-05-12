@@ -10,36 +10,26 @@
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Alegreya+Sans+SC">
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Allerta">
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Allerta+Stencil">
+  <link rel="stylesheet" href="{% static 'fonts/fontawesome-all.min.css' %}">
   <link rel="stylesheet" href="{% static 'fonts/font-awesome.min.css' %}">
   <link rel="stylesheet" href="{% static 'fonts/ionicons.min.css' %}">
   <link rel="stylesheet" href="{% static 'fonts/material-icons.min.css' %}">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Swiper/3.3.1/css/swiper.min.css">
+  <link rel="stylesheet" href="{% static 'fonts/fontawesome5-overrides.min.css' %}">
+  <link rel="stylesheet" href="{% static 'css/buttom-navigation-1.css' %}">
+  <link rel="stylesheet" href="{% static 'css/buttom-navigation.css' %}">
   <link rel="stylesheet" href="{% static 'css/styles.css' %}">
   <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 </head>
 
 <body>
   <div class="row" style="margin-left: 0px;margin-right: 0px;margin-top: 20px;margin-bottom: 20px;padding-right: 15px;padding-left: 15px;">
-    <div class="col-2 text-right align-self-center" style="padding-right: 10px;padding-left: 0px;"><a href="#"><img src="{% static 'images/when you see this send it to me 1@2x.png' %}" style="width: 50px;"></a></div>
-    <div class="col-8 text-left align-self-center" style="padding-right: 0px;padding-left: 12px;">
+    <div class="col-3 text-right align-self-center" style="padding-right: 10px;padding-left: 0px;"><i class="far fa-user-circle" style="font-size: 60px;"></i></div>
+    <div class="col-5 text-left align-self-center" style="padding-right: 0px;padding-left: 12px;">
       <h1>Hi, <br>David</h1>
     </div>
-    <div class="col-1 text-right align-self-center">
-      <div><a class="btn btn-sm" role="button" data-toggle="modal" href="#myModal" style="font-size: 40px;"><i class="icon ion-android-more-vertical"></i></a>
-        <div class="modal fade" role="dialog" tabindex="-1" id="myModal">
-          <div class="modal-dialog" role="document">
-            <div class="modal-content">
-              <div class="modal-header"><button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button></div>
-              <div class="modal-body">
-                <p class="text-center text-muted"><i class="fa fa-user-o"></i>&nbsp; Profile&nbsp;&nbsp;</p>
-                <p class="text-center text-muted"><i class="fa fa-heart-o"></i>&nbsp; Favorites</p>
-                <p class="text-center text-muted"><i class="icon ion-log-out"></i>&nbsp; Logout&nbsp;&nbsp;</p>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
+
+    {% include 'wardrobe/side_bar.html' %}
+
   </div>
   <div class="row" style="margin-right: 0px;margin-left: 0px;">
     <div class="col-12"><input type="text" style="padding-bottom: 0px;padding-top: 0px;margin-top: 0px;padding-left: 15px;" placeholder="Search"></div>
@@ -51,6 +41,7 @@
             <div class="col-12">
               <p class="text-left">Occassion</p>
             </div>
+
             {% for occassion in occassions %}
             <div class="col-3">
               <a href="{% url 'outfit_feed' %}?occassion={{occassion.name}}">
@@ -58,29 +49,32 @@
               </a>
             </div>
             {% empty %}
-            <h3>This is impossible</h3>
+            <h1>This is not possible</h1>
             {% endfor %}
+
           </div>
         </div>
       </div>
     </div>
   </div>
-
-  <div class="row" style="margin-right: 0px;margin-left: 0px;margin-top: 10px;margin-bottom: 10px;padding: 20px;">
+  <div class="row" style="margin-right: 0px;margin-left: 0px;margin-top: 10px;margin-bottom: 10px;">
     {% for outfit in outfits %}
-    <div class="col-6" style="padding-right: 5px;padding-left: 15px;">
+    <div class="col-6" style="padding-right: 5px;padding-left: 15px;padding-bottom: 15px;">
       <div class="row hh" style="margin-left: 0px;margin-right: 0px;background-color: #eaeaeb;padding-top: 8px;padding-right: 8px;padding-bottom: 8px;padding-left: 8px;">
         {% for key, value in outfit.items %}
-          <div class="col-6 text-center"><img class="img-fluid" src="{{value.image.url}}"></div>
+        <div class="col-6 text-center" style="padding-top: 15px;padding-bottom: 15px;"><img class="img-fluid" src="{{value.image.url}}"></div>
         {% endfor %}
+        <div class="col text-right"><a href="#"><i class="fa fa-heart-o" style="color: rgb(0,0,0);"></i></a></div>
       </div>
     </div>
 
     {% empty %}
     <center><h1>U are nothing</h1></center>
     {% endfor %}
+
   </div>
-    {% include 'wardrobe/bottom_nav.html' %}
+
+  {% include 'wardrobe/bottom_nav.html' %}
 
   <script src="{% static 'js/jquery.min.js' %}"></script>
   <script src="{% static 'bootstrap/js/bootstrap.min.js' %}"></script>
