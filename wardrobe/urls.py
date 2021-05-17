@@ -11,4 +11,5 @@ urlpatterns = [
     path('outfit_feed/', views.outfit_feed, name='outfit_feed'),
     path('outfit_view/<str:pk>/', views.outfit_view, name='outfit_view'),
     path('search/', views.search, name='search'),
+    path('test/<path:image>/', views.search_item, name='search_item')
 ]

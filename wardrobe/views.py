@@ -27,10 +27,13 @@ def gallery(request):
 @login_required
 def add_pic(request):
     categories = Category.objects.all()
+    styles = Style.objects.all()
 
     if request.method == 'POST':
         data = request.POST
         image = request.FILES.get('image')
+        print(type(image))
+        print(image)
 
         if data['category'] != 'none':
             category = Category.objects.get(id=data['category'])
@@ -40,13 +43,14 @@ def add_pic(request):
             category = None
 
         photo = Photos.objects.create(
+            user = request.user,
             category = category,
             description=data['description'],
             image=image,
         )
         return redirect('gallery')
 
-    context = {'categories': categories}
+    context = {'categories': categories, 'styles': styles}
     template_name = 'wardrobe/add_pic.html'
     return render(request, template_name, context)
 
@@ -155,7 +159,7 @@ def outfit_feed(request):
 #  ############# PERMUTATING THE OUTFITS PROPERLY ###################
     outfits = []
 
-    for i in range(8):
+    for i in range(2):
         outfit = {
         head: random.choice(head),
         top: random.choice(top),
@@ -182,11 +186,8 @@ def search(request):
     if request.method == 'POST':
         query = request.POST['query']
         query = '+'.join(query.split())
-        print(query)
     else:
         query = 'clothes'
-
-    SAVE_FOLDER = ''
 
     GOOGLE_IMAGE = \
     'https://www.google.com/search?site=&tbm=isch&source=hp&biw=1873&bih=990&'
@@ -214,53 +215,60 @@ def search(request):
         links.append(link)
     links.pop(0)
 
+    description = query.split('+')
+    description = ' '.join(description)
 
-    try:
-        image_picked = request.GET.get('image')
-        response = requests.get(image_picked)
-        imagename = query + '.jpg'
-        with open(imagename, 'wb') as file:
-            file.write(response.content)
+    global name
+    def name():
+        return description
 
-        category = Category.objects.get(name='top')
-        style = Style.objects.all()
+
+
+    context = {'images': links, 'query': description}
+    template_name = 'wardrobe/search.html'
+
+    return render(request, template_name, context)
+
+@login_required
+def search_item(request, image):
+
+    SAVE_FOLDER = 'staticfiles/searched'
+    name = 'test.jpg'
+
+    categories = Category.objects.all()
+    styles = Style.objects.all()
+
+    user = request.user
+    category = Category.objects.get(name='top')
+    style = Style.objects.all()
+    response = requests.get(image)
+
+    photo = SAVE_FOLDER + '/' + name
+    with open(photo, 'wb') as file:
+        file.write(response.content)
+
+    if request.method == 'POST':
+        data = request.POST
+        print(type(photo))
+        print(photo)
+
+        if data['category'] != 'none':
+            category = Category.objects.get(id=data['category'])
+        elif data['category_new'] != '':
+            category, created = Category.objects.get_or_create(name=data['category_new'])
+        else:
+            category = None
 
         photo = Photos.objects.create(
             user = request.user,
             category = category,
-            image=imagename,
+            description=data['description'],
+            image=photo,
         )
-
-        photo.save()
-
-        photo.style.set(style)
-
-    except Exception as e:
-        print(e)
-        pass
-
-    # if request.method == 'POST':
-    #     data = request.POST
-    #     selected_clothes = request.POST.getlist('clothe')
-    #
-    #     for i, imagelink in enumerate(selected_clothes):
-    #         response = requests.get(imagelink)
-    #
-    #         imagename = SAVE_FOLDER + '/' + query + str(i+1) + '.jpg'
-    #         with open(imagename, 'wb') as file:
-    #             file.write(response.content)
-    #
-    #         photo = Photos.objects.create(
-                # description='clothe engine test',
-                # image=imagename,
-    #         )
-    #     return redirect('gallery')
-
-    description = query.split('+')
-    description = ' '.join(description)
+        return redirect('gallery')
 
 
-    context = {'images': links, 'query': description}
+
     template_name = 'wardrobe/search_item.html'
-
+    context = {'image': image, 'name': name, 'categories': categories, 'styles': styles}
     return render(request, template_name, context)

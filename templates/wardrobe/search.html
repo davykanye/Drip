@@ -23,43 +23,38 @@
 </head>
 
 <body>
-  <div class="row" style="margin-left: 0px;margin-right: 0px;padding-right: 15px;padding-left: 15px;margin-top: 20px;">
-    <div class="col-3 text-center align-self-center" style="padding-left: 0px;padding-right: 0px;"><i class="far fa-user-circle" style="font-size: 60px;"></i></div>
-    <div class="col-5 text-left align-self-center" style="padding-left: 0px;">
-      <p class="text-left" style="margin-bottom: 0px;"><strong>{{user.username}}</strong><br>biography</p>
+  <div class="row" style="margin-right: 0px;margin-left: 0px;">
+    <div class="col-12 text-center">
+      <p class="text-center" style="font-size: 30px;"><strong>Drip</strong></p>
+    </div>
+    <!-- Search bar -->
+    <div class="col-12">
+      <form method="POST">
+        {% csrf_token %}
+        <div class="col align-self-center">
+          <input type="search" name='query' placeholder="Search" style="padding-left: 15px;margin-bottom: 15px;">
+          <button class="btn btn-dark" type="submit" style="margin-top: 0px;">Search</button>
+        </div>
+
+      </form>
     </div>
 
 
-    {% include 'wardrobe/side_bar.html' %}
   </div>
-
-
-  <div class="row">
-    <div class="col" style="padding-right: 0px;padding-left: 0px;">
-      <div>
-        <ul class="nav nav-tabs" style="margin-top: 20px;padding-bottom: 16px;">
-          <li class="nav-item"><a class="nav-link active text-center" role="tab" data-toggle="tab" href="#tab-1">Item</a></li>
-          <li class="nav-item" style="margin-bottom: 0px;"><a class="nav-link" role="tab" data-toggle="tab" href="#tab-2" style="color: #F19A3E;">Outfits</a></li>
-        </ul>
-        <div class="tab-content">
-          <div class="tab-pane fade show active" role="tabpanel" id="tab-1">
-            <div class="row" style="margin-right: 0px;margin-left: 0px;padding-top: 10px;padding-bottom: 3px;">
-              {% for photo in photos %}
-              <div class="col-4" style="padding-right: 3px;padding-left: 3px;">
-                <a href="{% url 'photo' photo.id %}"><img src="{{photo.image.url}}"></a>
-              </div>
-              {% empty %}
-              <center>
-                <h3>Jesus Christ</h3>
-              </center>
-              {% endfor %}
-            </div>
-
-          </div>
-
+  <div class="row" style="margin-right: 0px;margin-left: 0px;margin-top: 15px;">
+    {% for img in images %}
+    <div class="col-6">
+      <div class="row" style="margin-right: 0px;margin-left: 0px;">
+        <div class="col-12 text-center" style="background-color: #f7f7f7;padding-top: 15px;padding-bottom: 15px;"><img src="{{img}}"></div>
+        <div class="col-12" style="padding-top: 15px;">
+          <p></p>
+          <a href="{% url 'search_item' img %}" class="btn btn-dark">Add to closet</a>
         </div>
       </div>
     </div>
+    {% empty %}
+    <h3>No Photos here....</h3>
+    {% endfor %}
   </div>
 
   {% include 'wardrobe/bottom_nav.html' %}

@@ -128,16 +128,15 @@ STATIC_URL = '/static/'
 MEDIA_URL = '/photos/'
 
 STATICFILES_DIRS = [
-    'static'
+    os.path.join(BASE_DIR, 'static'),
 ]
 
 LOGIN_REDIRECT_URL = 'gallery'
 
 LOGIN_URL = 'login'
 
-MEDIA_ROOT = BASE_DIR/'static/images'
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
-
+STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
 AWS_QUERYSTRING_AUTH = False
 DEFAULT_FILE_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'

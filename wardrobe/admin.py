@@ -9,6 +9,7 @@ class OutfitAdmin(admin.ModelAdmin):
 
 class PhotosAdmin(admin.ModelAdmin):
     list_display = ['admin_photo', 'user','description', 'category']
+    list_filter = ['user', 'style', 'category']
 
 
 admin.site.register(Category)

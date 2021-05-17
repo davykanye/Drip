@@ -38,6 +38,18 @@
             </div>
 
             <div class="form-group m-3">
+              <label>Style</label>
+
+              <select class="form-control" name="style">
+                <option value="none">Select the style</option>
+                {% for style in styles %}
+                  <option value="{{style.id}}">{{style.name}}</option>
+                {% endfor %}
+              </select>
+
+            </div>
+
+            <div class="form-group m-3">
               <label>Create a new category</label>
               <input name="category_new" type="text" placeholder="Create a new category" class="form-control">
             </div>
@@ -46,6 +58,8 @@
               <label>Upload image</label>
               <input required name="image" type="file" multiple class="form-control-file">
             </div>
+
+
 
             <button type='submit' class="btn btn-primary m-3">Submit</button>
 
