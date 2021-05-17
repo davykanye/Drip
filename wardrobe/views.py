@@ -159,7 +159,7 @@ def outfit_feed(request):
 #  ############# PERMUTATING THE OUTFITS PROPERLY ###################
     outfits = []
 
-    for i in range(2):
+    for i in range(8):
         outfit = {
         head: random.choice(head),
         top: random.choice(top),
@@ -249,8 +249,7 @@ def search_item(request, image):
 
     if request.method == 'POST':
         data = request.POST
-        print(type(photo))
-        print(photo)
+        image = photo
 
         if data['category'] != 'none':
             category = Category.objects.get(id=data['category'])
@@ -263,7 +262,7 @@ def search_item(request, image):
             user = request.user,
             category = category,
             description=data['description'],
-            image=photo,
+            image=image,
         )
         return redirect('gallery')
 
