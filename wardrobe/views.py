@@ -173,10 +173,9 @@ def outfit_feed(request):
     return render(request, template_name, context)
 
 @login_required
-def outfit_view(request, pk):
-    outfit = Outfit.objects.get(id=pk)
+def outfit_view(request):
 
-    context = {'outfit': outfit}
+    context = {}
     template_name = 'wardrobe/outfit_view.html'
     return render(request, template_name, context)
 

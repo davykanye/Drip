@@ -46,7 +46,7 @@
             <div class="row" style="margin-right: 0px;margin-left: 0px;padding-top: 10px;padding-bottom: 3px;">
               {% for photo in photos %}
               <div class="col-4" style="padding-right: 3px;padding-left: 3px;">
-                <a href="{% url 'photo' photo.id %}"><img src="{{photo.image.url}}"></a>
+                <a href="{% url 'photo' photo.id %}"><img src="{{photo.image.url}}" id="photo"></a>
               </div>
               {% empty %}
               <center>
@@ -67,6 +67,7 @@
   <script src="{% static 'js/jquery.min.js' %}"></script>
   <script src="{% static 'bootstrap/js/bootstrap.min.js' %}"></script>
   <script src="{% static 'js/disappear.js' %}"></script>
+  <script src="{% static 'js/test.js' %}"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/Swiper/3.3.1/js/swiper.jquery.min.js"></script>
   <script src="{% static 'js/Simple-Slider.js' %}"></script>
 </body>
