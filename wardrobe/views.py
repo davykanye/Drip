@@ -6,6 +6,9 @@ from django.urls import reverse
 import os
 import json
 from bs4 import BeautifulSoup
+from io import BytesIO
+from PIL import Image
+from django.core.files.uploadedfile import InMemoryUploadedFile
 import requests
 import time
 import random
@@ -58,6 +61,7 @@ def add_pic(request):
 @login_required
 def detail(request, pk):
     photo = Photos.objects.get(id=pk)
+    print(type(photo.image))
     context = {'photo' : photo}
     template_name = 'wardrobe/detail.html'
     return render(request, template_name, context)
@@ -217,8 +221,8 @@ def search(request):
     description = query.split('+')
     description = ' '.join(description)
 
-    global name
-    def name():
+    global proper
+    def proper():
         return description
 
 
@@ -232,7 +236,8 @@ def search(request):
 def search_item(request, image):
 
     SAVE_FOLDER = 'staticfiles/searched'
-    name = 'test.jpg'
+    name = proper()
+    id = random.randint(1, 9)
 
     categories = Category.objects.all()
     styles = Style.objects.all()
@@ -242,13 +247,25 @@ def search_item(request, image):
     style = Style.objects.all()
     response = requests.get(image)
 
-    photo = SAVE_FOLDER + '/' + name
+    photo = SAVE_FOLDER + '/' + name + str(id) + '.jpg'
     with open(photo, 'wb') as file:
         file.write(response.content)
 
+    img = Image.open(photo)
+    image_bytes = BytesIO()
+    img.save(image_bytes, format='JPEG')
+
+
+    hope = InMemoryUploadedFile(
+    image_bytes, None, name, 'image/jpeg', None, None, None
+    )
+
+
+    print(type(img))
+    print(img.size)
+
     if request.method == 'POST':
         data = request.POST
-        image = photo
 
         if data['category'] != 'none':
             category = Category.objects.get(id=data['category'])
@@ -261,7 +278,7 @@ def search_item(request, image):
             user = request.user,
             category = category,
             description=data['description'],
-            image=image,
+            image=hope,
         )
         return redirect('gallery')
 
