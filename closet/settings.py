@@ -145,3 +145,12 @@ AWS_ACCESS_KEY_ID = 'AKIAVG4ZQKOYHC56SAQY'
 AWS_SECRET_ACCESS_KEY = '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'
 
 AWS_STORAGE_BUCKET_NAME = 'drip-closet'
+
+
+####### SMTP CONFIG ############
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_PORT = 587
+EMAIL_USE_TLS = True
+EMAIL_HOST_USER = 'davykanye@gmail.com'
+EMAIL_HOST_PASSWORD = 'davidomokanye'
