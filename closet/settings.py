@@ -133,7 +133,7 @@ STATICFILES_DIRS = [
 ]
 
 ############### PWA SECTION #################
-PWA_SERVICE_WORKER_PATH = os.path.join(BASE_DIR, 'staticfiles/js', 'serviceworker.js')
+PWA_SERVICE_WORKER_PATH = os.path.join(BASE_DIR, 'serviceworker.js')
 
 PWA_APP_NAME = 'Drip'
 PWA_APP_DESCRIPTION = "We bring out your best self"
