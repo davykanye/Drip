@@ -140,39 +140,62 @@ def create_outfit(request):
 def outfit_feed(request):
     user = request.user
     items = Photos.objects.filter(user=user)
-    ######### FIlTERING BY STYLES ###########
-    occassions = Occassion.objects.all()
-    category = Category.objects.all()
-    event = request.GET.get('occassion')
-    if event == None:
-        pass
+    if len(items) <= 3:
+        template_name = 'wardrobe/feed_error.html'
+        context = {}
+        return render(request, template_name, context)
     else:
-        event = Occassion.objects.get(name=str(event))
-        styles = event.styles.all()
+        ######### FIlTERING BY STYLES ###########
+        occassions = Occassion.objects.all()
+        category = Category.objects.all()
+        event = request.GET.get('occassion')
+        if event == None:
+            pass
+        else:
+            event = Occassion.objects.get(name=str(event))
+            styles = event.styles.all()
 
-        items = items.filter(style__name__in=list(styles))
-        print(items)
-    head = items.filter(category__name='headwear')
-    top = items.filter(category__name='top')
-    jacket = items.filter(category__name='jacket')
-    lower = items.filter(category__name='lower')
-    shoes = items.filter(category__name='shoes')
+            items = items.filter(style__name__in=list(styles))
+            print(items)
+            print(len(items))
 
-#  ############# PERMUTATING THE OUTFITS PROPERLY ###################
-    outfits = []
+        head = items.filter(category__name='headwear')
+        top = items.filter(category__name='top')
+        jacket = items.filter(category__name='jacket')
+        lower = items.filter(category__name='lower')
+        shoes = items.filter(category__name='shoes')
 
-    for i in range(8):
-        outfit = {
-        head: random.choice(head),
-        top: random.choice(top),
-        lower: random.choice(lower),
-        shoes: random.choice(shoes)
-        }
-        outfits.append(outfit)
+    #  ############# PERMUTATING THE OUTFITS PROPERLY ###################
+        outfits = []
+        pick = [1,1,1,1,1,2,2,3,3,3]
 
-    context = {'outfits': outfits, 'occassions':occassions, 'category':category}
-    template_name = 'wardrobe/outfit_feed.html'
-    return render(request, template_name, context)
+        for i in range(8):
+            rand = random.choice(pick)
+            if rand == 1:
+                outfit = {
+                top: random.choice(top),
+                lower: random.choice(lower),
+                shoes: random.choice(shoes)
+                }
+            elif rand == 2:
+                outfit = {
+                head: random.choice(head),
+                top: random.choice(top),
+                lower: random.choice(lower),
+                shoes: random.choice(shoes)
+                }
+            else:
+                outfit = {
+                top: random.choice(top),
+                jacket: random.choice(jacket),
+                lower: random.choice(lower),
+                shoes: random.choice(shoes)
+                }
+            outfits.append(outfit)
+
+        context = {'outfits': outfits, 'occassions':occassions, 'category':category}
+        template_name = 'wardrobe/outfit_feed.html'
+        return render(request, template_name, context)
 
 @login_required
 def outfit_view(request):

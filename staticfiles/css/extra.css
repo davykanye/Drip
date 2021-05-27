@@ -1,0 +1,10 @@
+.error{
+  align-content: center;
+  left: 50%;
+  margin: auto;
+}
+
+.error h5{
+  color: red;
+  text-align: center;
+}

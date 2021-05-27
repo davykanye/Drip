@@ -1,5 +1,6 @@
 from django.shortcuts import render, redirect
 from django.http import HttpResponse
+from django.contrib import messages
 from django.contrib.auth.models import User, auth
 from django.shortcuts import (get_object_or_404, HttpResponseRedirect)
 from django.urls import reverse
@@ -16,9 +17,11 @@ def register(request):
 
         if data['password1'] == data['password2']:
             if User.objects.filter(username=username).exists():
-                print('username taken')
+                messages.info(request, 'username taken')
+                return redirect('register')
             elif User.objects.filter(email=email).exists():
-                print('email already exists')
+                messages.info(request, 'Email taken')
+                return redirect('register')
             else:
                 user = User.objects.create_user(username=username, email=email, password=password,)
                 user.save()
@@ -28,7 +31,7 @@ def register(request):
 
 
         else:
-            print('passwords are not matching')
+            messages.info(request, 'passwords are not matching')
             return redirect('register')
 
     template_name = 'accounts/register.html'
@@ -46,7 +49,7 @@ def login(request):
             auth.login(request, user)
             return redirect('gallery')
         else:
-            print('Invalid info')
+            messages.info(request, 'Username or Password is invalid')
             return redirect('/')
 
 

@@ -41,6 +41,13 @@
         <div class="col-12 align-self-start y"><button class="btn btn-primary" type="submit" style="background-color: rgb(37,37,37);font-size: 20px;">Sign Up</button></div>
 
       </form>
+
+      <div class="what">
+        {% for message in messages %}
+          <h3>{{message}}</h3>
+        {% endfor %}
+      </div>
+
     </div>
 
   </div>
