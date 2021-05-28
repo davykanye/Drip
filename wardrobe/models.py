@@ -9,7 +9,16 @@ class Category(models.Model):
     def __str__(self):
         return self.name
 
+class Profile(models.Model):
+    user = models.OneToOneField(User, on_delete=models.CASCADE, primary_key=True)
+    image = models.ImageField(null=False, blank=False)
 
+    def __str__(self):
+        return self.user.username
+
+    def admin_photo(self):
+        return mark_safe('<img src="{}" width="100" />'.format(self.image.url))
+    admin_photo.allow_tags = True
 #
 class Style(models.Model):
     name = models.CharField(max_length=100, blank=False, null=False)

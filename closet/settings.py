@@ -146,13 +146,13 @@ PWA_APP_START_URL = '.'
 PWA_APP_STATUS_BAR_COLOR = 'default'
 PWA_APP_ICONS = [
 	{
-		'src': 'https://cdn.pixabay.com/photo/2017/01/31/23/42/animal-2028258_960_720.png',
+		'src': 'https://cdn.discordapp.com/attachments/847573375908053024/847578677746466856/dri2.png',
 		'sizes': '160x160'
 	}
 ]
 PWA_APP_ICONS_APPLE = [
 	{
-		'src': 'staticfiles/img/Drip.png',
+		'src': 'https://cdn.discordapp.com/attachments/847573375908053024/847578677746466856/dri2.png',
 		'sizes': '160x160'
 	}
 ]

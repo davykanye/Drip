@@ -1,8 +1,9 @@
 from django.shortcuts import render, redirect
-from wardrobe.models import Category, Style, Photos, Outfit, Occassion
+from wardrobe.models import Category, Style, Photos, Outfit, Occassion, Profile
 from django.shortcuts import (get_object_or_404, HttpResponseRedirect)
 from django.contrib.auth.decorators import login_required
 from django.urls import reverse
+from django.core.exceptions import ObjectDoesNotExist
 import os
 import json
 from bs4 import BeautifulSoup
@@ -10,19 +11,23 @@ from io import BytesIO
 from PIL import Image
 from django.core.files.uploadedfile import InMemoryUploadedFile
 import requests
-import time
 import random
-import math
 
 # Create your views here.
 @login_required
 def gallery(request):
     user = request.user
+    try:
+        pro = Profile.objects.get(user=user)
+        profile = pro.image.url
+    except ObjectDoesNotExist:
+        profile = None
+
     categories = Category.objects.all()
     photos = Photos.objects.filter(user=user)
     outfits = Outfit.objects.all()
 
-    context = {'categories': categories, 'photos': photos, 'outfits': outfits, 'user': user}
+    context = {'categories': categories, 'photos': photos, 'outfits': outfits, 'user': user, 'profile': profile}
     template_name = 'wardrobe/wardrobe.html'
     return render(request, template_name, context)
 
@@ -95,12 +100,21 @@ def edit_pic(request, pk):
 
 # deleting clothe items
 @login_required
+def profile(request):
+
+    context = {}
+    template_name = 'wardrobe/Profile.html'
+    return render(request, template_name, context)
+
+# Profile View man
+@login_required
 def delete(request, pk):
     photo = Photos.objects.get(id=pk)
 
     photo.delete()
 
     return HttpResponseRedirect('/')
+
 
 
 ################## OUTFITS SECTION ###############################
