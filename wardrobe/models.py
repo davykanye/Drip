@@ -58,6 +58,9 @@ class Outfit(models.Model):
     def __str__(self):
         return self.name
 
+    @property
+    def clothes(self):
+        return self.items.all()
 
 
 # class Pizza(models.Model):

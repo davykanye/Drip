@@ -29,6 +29,14 @@ def gallery(request):
     profile = proc()
     categories = Category.objects.all()
     photos = Photos.objects.filter(user=user)
+    category = request.GET.get('category')
+    if category == None:
+        pass
+    else:
+        photos = photos.filter(category__name=category)
+
+
+
     outfits = Outfit.objects.all()
 
     context = {'categories': categories, 'photos': photos, 'outfits': outfits, 'user': user, 'profile': profile}
@@ -208,6 +216,11 @@ def outfit_feed(request):
         context = {'outfits': outfits, 'occassions':occassions, 'category':category, 'profile':profile}
         template_name = 'wardrobe/outfit_feed.html'
         return render(request, template_name, context)
+
+@login_required
+def save_outfit(request, outfit):
+    pass
+
 
 @login_required
 def outfit_view(request):

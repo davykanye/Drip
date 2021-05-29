@@ -28,13 +28,15 @@
 
   <div class="row pulse animated kl" style="margin-left: 0px;margin-right: 0px;">
     <div class="col-6 align-self-center"><a href="#"> <img src="{% static 'img/Drip.png' %}" alt=""  style="width: 70px;"> </a></div>
-    <div class="col-6 text-right align-self-center"><a href="#"><i class="icon-settings" style="font-size: 30px;"></i></a></div>
+    <div class="col-6 text-right align-self-center">
+      
+    </div>
     <div class="col-12 text-center align-self-end gh"><img src="{% static 'img/monkey.jpg' %}" style="width: 90px;"></div>
     <div class="col-12 align-self-end">
-      <h1 class="text-center" style="margin-bottom: 0px;">Kuku 69</h1>
+      <h1 class="text-center" style="margin-bottom: 0px;">{{user.username}}</h1>
     </div>
     <div class="col">
-      <p class="text-center" style="margin-bottom: 0px;color: rgb(115,115,115);font-size: 14px;">Moshood Davidson</p>
+      <p class="text-center" style="margin-bottom: 0px;color: rgb(115,115,115);font-size: 14px;">Moshood Jimoh Kuku</p>
     </div>
   </div>
   <div class="row jk" style="margin-left: 0px;margin-right: 0px;">
@@ -50,11 +52,10 @@
               <div class="col">
                 <div>
                   <ul class="nav nav-tabs" style="padding-right: 15px;padding-left: 15px;">
-                    <li class="nav-item"><a class="nav-link" role="tab" data-toggle="tab" href="#">All</a></li>
-                    <li class="nav-item"><a class="nav-link" role="tab" data-toggle="tab" href="#">Top</a></li>
-                    <li class="nav-item"><a class="nav-link" role="tab" data-toggle="tab" href="#">Legwear</a></li>
-                    <li class="nav-item"><a class="nav-link" role="tab" data-toggle="tab" href="#">Footwear</a></li>
-                    <li class="nav-item"><a class="nav-link active" role="tab" data-toggle="tab" href="#">Accessories</a></li>
+                    <li class="nav-item"><a class="nav-link" href="{% url 'gallery' %}">All</a></li>
+                    {% for category in categories %}
+                    <li class="nav-item"><a class="nav-link" href="{% url 'gallery' %}?category={{category.name}}"> {{category.name}} </a></li>
+                    {% endfor %}
                   </ul>
 
 
@@ -73,24 +74,18 @@
 <!-- Outfits  -->
             <div class="tab-pane fade" role="tabpanel" id="tab-2">
               <div class="row" style="margin-right: 0px;margin-left: 0px;margin-top: 10px;margin-bottom: 10px;">
+                {% for outfit in outfits %}
                 <div class="col-6" style="padding-right: 5px;padding-left: 5px;">
                   <div class="row hh" style="margin-left: 0px;margin-right: 0px;background: linear-gradient(43deg, #4158d0 0%, #c850c0 46%,#ffcc70 100%);padding-top: 8px;padding-right: 8px;padding-bottom: 8px;padding-left: 8px;">
-                    <div class="col-6 text-center" style="padding-top: 15px;padding-bottom: 15px;"><a href="#"><img class="img-fluid" src="assets/img/Twice-Bucket-Hat-Back_1024x1024.png"></a></div>
-                    <div class="col-6 text-center" style="padding-top: 15px;padding-bottom: 15px;"><a href="#"><img class="img-fluid" src="assets/img/bdefcbc72735f64db17f3250b1e64245.png"></a></div>
-                    <div class="col-6 text-center" style="padding-top: 15px;padding-bottom: 15px;"><a href="#"><img class="img-fluid" src="assets/img/download%20(1).png"></a></div>
-                    <div class="col-6 text-center" style="padding-top: 15px;padding-bottom: 15px;"><a href="#"><img class="img-fluid" src="assets/img/WhiteSneakers-Everlane.png"></a></div>
-                    <div class="col text-right"><a href="#"><i class="la la-bookmark-o" style="color: rgb(255,255,255);"></i></a></div>
+                    {% for i in outfit.clothes %}
+                    <div class="col-6 text-center" style="padding-top: 15px;padding-bottom: 15px;"><a href="#"><img class="img-fluid" src="{{i.image.url}}"></a></div>
+                    {% endfor %}
+
                   </div>
                 </div>
-                <div class="col-6" style="padding-right: 5px;padding-left: 5px;">
-                  <div class="row hh" style="margin-left: 0px;margin-right: 0px;background: linear-gradient(43deg, #4158d0 0%, #c850c0 46%,#ffcc70 100%);padding-top: 8px;padding-right: 8px;padding-bottom: 8px;padding-left: 8px;">
-                    <div class="col-6 text-center" style="padding-top: 15px;padding-bottom: 15px;"><a href="#"><img class="img-fluid" src="assets/img/Twice-Bucket-Hat-Back_1024x1024.png"></a></div>
-                    <div class="col-6 text-center" style="padding-top: 15px;padding-bottom: 15px;"><a href="#"><img class="img-fluid" src="assets/img/bdefcbc72735f64db17f3250b1e64245.png"></a></div>
-                    <div class="col-6 text-center" style="padding-top: 15px;padding-bottom: 15px;"><a href="#"><img class="img-fluid" src="assets/img/download%20(1).png"></a></div>
-                    <div class="col-6 text-center" style="padding-top: 15px;padding-bottom: 15px;"><a href="#"><img class="img-fluid" src="assets/img/WhiteSneakers-Everlane.png"></a></div>
-                    <div class="col text-right"><a href="#"><i class="la la-bookmark-o" style="color: rgb(255,255,255);"></i></a></div>
-                  </div>
-                </div>
+                {% empty %}
+                <h1>qweerrty</h1>
+                {% endfor %}
               </div>
 
             </div>

@@ -1,13 +1,21 @@
-<div class="col-4 text-right align-self-right">
-  <div><a class="btn btn-sm" role="button" data-toggle="modal" href="#myModal" style="font-size: 40px;"><i class="icon ion-android-more-vertical"></i></a>
-    <div class="modal fade" role="dialog" tabindex="-1" id="myModal">
-      <div class="modal-dialog" role="document">
-        <div class="modal-content">
-          <div class="modal-header"><button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button></div>
-          <div class="modal-body">
-            <p class="text-center text-muted"><i class="fa fa-user-o"></i> <a href="{% url 'profile' %}">&nbsp; Profile&nbsp;&nbsp;</a> </p>
-            <p class="text-center text-muted"><i class="icon ion-log-out"></i><a href="{% url 'logout' %}">&nbsp; Logout&nbsp;&nbsp;</a> </p>
-          </div>
+{% load static %}
+<div>
+  <a class="btn btn-lg" role="button" data-toggle="modal" href="#myModal">
+    <i class="icon-settings" style="font-size: 30px;"></i>
+  </a>
+  <div class="modal fade" role="dialog" tabindex="-1" id="myModal">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+      <div class="modal-content">
+        <div class="modal-body">
+          <a href="#">
+            <p class="lead text-left text-muted"><i class="la la-user" style="margin-right: 15px;"></i>Account</p>
+          </a>
+          <a href="#">
+            <p class="lead text-left text-muted"><i class="la la-info-circle" style="margin-right: 15px;"></i>Description </p>
+          </a>
+          <a href="#">
+            <p class="lead text-left text-muted"><i class="icon-logout" style="margin-right: 15px;"></i>Log out</p>
+          </a>
         </div>
       </div>
     </div>

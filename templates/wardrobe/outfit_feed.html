@@ -47,26 +47,15 @@
   <main class="hg">
     {% for outfit in outfits %}
       <div class="container" style="margin-top: 45px;margin-bottom: 50px;">
-        <div class="row" style="margin-right: 0px;margin-left: 0px;margin-bottom: 15px;">
-          <div class="col-9 text-left" style="padding-right: 0px;padding-left: 0px;">
-            <div class="row" style="margin-right: 0px;margin-left: 0px;">
-              <div class="col-5 text-left hn" style="padding-right: 0px;">
-                <img class="rounded-circle" src="{{profile}}" style="width: 60px;">
-              </div>
 
-            </div>
-          </div>
-
-        </div>
-        <a href="{% url 'outfit_view' %}">
         <div class="row text-center align-items-center qw" style="margin-right: 0px;margin-left: 0px;">
           {% for key, value in outfit.items %}
           <div class="col-12" style="padding-top: 15px;padding-bottom: 15px;"><img src="{{value.image.url}}" style="width: 100px;"></div>
           {% endfor %}
         </div>
-        </a>
 
-        <div class="col text-right" style="padding-right: 15px;padding-top: 10px;"><a href="#"> <img src="{% static 'img/bookmark.svg' %}" alt="" style="width: 40px;"> </a></div>
+
+        <div class="col text-right" style="padding-right: 15px;padding-top: 10px;"><a href="{% url 'save_outfit' %}"> <img src="{% static 'img/bookmark.svg' %}" alt="" style="width: 40px;"> </a></div>
 
       </div>
      {% empty %}
