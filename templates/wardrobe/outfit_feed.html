@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html>
 {% load static %}
+
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
@@ -21,66 +22,69 @@
   <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 </head>
 
-<body>
-  <div class="row" style="margin-left: 0px;margin-right: 0px;margin-top: 20px;margin-bottom: 20px;padding-right: 15px;padding-left: 15px;">
-    <div class="col-3 text-right align-self-center" style="padding-right: 10px;padding-left: 0px;"><i class="far fa-user-circle" style="font-size: 60px;"></i></div>
-    <div class="col-5 text-left align-self-center" style="padding-right: 0px;padding-left: 12px;">
-      <h1>Hi, <br>David</h1>
+<body style="background-color: #ffffff;">
+  <header>
+    <div class="col" style="padding-top: 10px;padding-bottom: 6px;padding-left: 34px;">
+      <a class="ag" href="#">
+        <img src="{% static 'img/dri4.png' %}" style="width: 50px;font-family: 'Campton Book';margin-top: 20px;">
+      </a>
+
     </div>
-
-    {% include 'wardrobe/side_bar.html' %}
-
-  </div>
-  <div class="row" style="margin-right: 0px;margin-left: 0px;">
-    <div class="col-12"><input type="text" style="padding-bottom: 0px;padding-top: 0px;margin-top: 0px;padding-left: 15px;" placeholder="Search"></div>
-    <div class="col" style="margin-bottom: 18px;">
-      <div class="text-right" style="padding-top: 10px;padding-right: 15px;"><a class="btn btn-sm text-left" data-toggle="collapse" aria-expanded="false" aria-controls="collapse-1" href="#collapse-1" role="button"
-          style="padding-right: 0px;padding-left: 0px;border-radius: 10px;background-color: rgba(255,189,19,0);padding-top: 0px;padding-bottom: 0px;">Filter</a>
-        <div class="collapse" id="collapse-1">
-          <div class="row" style="margin-right: 0px;margin-left: 0px;">
-            <div class="col-12">
-              <p class="text-left">Occassion</p>
-            </div>
-
-            {% for occassion in occassions %}
-            <div class="col-3">
-              <a href="{% url 'outfit_feed' %}?occassion={{occassion.name}}">
-                <p>{{occassion.name}}</p>
-              </a>
-            </div>
-            {% empty %}
+  </header>
+  <div class="col-12 ui" style="margin-top: 74px;">
+    <div class="row justify-content-center" style="margin-right: 0px;margin-left: 0px;">
+      {% for occassion in occassions %}
+      <div class="col-3 text-center" style="margin-right: 4px;margin-left: 4px;background-color: #eaebeb;padding-top: 15px;padding-bottom: 0px;">
+          <a href="{% url 'outfit_feed' %}?occassion={{occassion.name}}"><p style="margin-bottom: 0px;">{{occassion.name}}</p></a>
+      </div>
+      {% empty %}
             <h1>This is not possible</h1>
-            {% endfor %}
+      {% endfor %}
 
-          </div>
-        </div>
-      </div>
     </div>
   </div>
-  <div class="row" style="margin-right: 0px;margin-left: 0px;margin-top: 10px;margin-bottom: 10px;">
+
+  <main class="hg">
     {% for outfit in outfits %}
-    <div class="col-6" style="padding-right: 5px;padding-left: 15px;padding-bottom: 15px;">
-      <div class="row hh" style="margin-left: 0px;margin-right: 0px;background-color: #eaeaeb;padding-top: 8px;padding-right: 8px;padding-bottom: 8px;padding-left: 8px;">
-        {% for key, value in outfit.items %}
-        <div class="col-6 text-center" style="padding-top: 15px;padding-bottom: 15px;"><a href="{% url 'outfit_view' %}"><img class="img-fluid" src="{{value.image.url}}"></a></div>
-        {% endfor %}
-        <div class="col text-right"><a href="#"><i class="fa fa-heart-o" style="color: rgb(0,0,0);"></i></a></div>
+      <div class="container" style="margin-top: 45px;margin-bottom: 50px;">
+        <div class="row" style="margin-right: 0px;margin-left: 0px;margin-bottom: 15px;">
+          <div class="col-9 text-left" style="padding-right: 0px;padding-left: 0px;">
+            <div class="row" style="margin-right: 0px;margin-left: 0px;">
+              <div class="col-5 text-left hn" style="padding-right: 0px;">
+                <img class="rounded-circle" src="{{profile}}" style="width: 60px;">
+              </div>
+
+            </div>
+          </div>
+
+        </div>
+        <a href="{% url 'outfit_view' %}">
+        <div class="row text-center align-items-center qw" style="margin-right: 0px;margin-left: 0px;">
+          {% for key, value in outfit.items %}
+          <div class="col-12" style="padding-top: 15px;padding-bottom: 15px;"><img src="{{value.image.url}}" style="width: 100px;"></div>
+          {% endfor %}
+        </div>
+        </a>
+
+        <div class="col text-right" style="padding-right: 15px;padding-top: 10px;"><a href="#"> <img src="{% static 'img/bookmark.svg' %}" alt="" style="width: 40px;"> </a></div>
+
       </div>
-    </div>
-
-    {% empty %}
-    <center><h1>U are nothing</h1></center>
-    {% endfor %}
-
-  </div>
+     {% empty %}
+     <h1>qweerrty</h1>
+     {% endfor %}
+  </main>
 
   {% include 'wardrobe/bottom_nav.html' %}
 
+  <script src="{% static 'js/bs-init.js' %}"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.1.1/aos.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap-select@1.13.14/dist/js/bootstrap-select.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap-select@1.13.14/dist/js/i18n/defaults-*.min.js"></script>
+  <script src="{% static 'js/Picker.js' %}"></script>
+  <script src="{% static 'js/scroll.js' %}"></script>
   <script src="{% static 'js/jquery.min.js' %}"></script>
   <script src="{% static 'bootstrap/js/bootstrap.min.js' %}"></script>
-  <script src="{% static 'js/disappear.js' %}"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/Swiper/3.3.1/js/swiper.jquery.min.js"></script>
-  <script src="{% static 'js/Simple-Slider.js' %}"></script>
 </body>
 
 </html>

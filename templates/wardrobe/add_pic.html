@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
+{% load static %}
 
 <head>
   <meta charset="utf-8">
@@ -7,7 +8,6 @@
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BmbxuPwQa2lc/FVzBcNJ7UAyJxM6wuqIj61tLrc4wSX0szH/Ev+nYRRuWlolflfl" crossorigin="anonymous">
   <title>Add Photo</title>
 </head>
-
 
 <body class="m-5">
   <div class="container">
@@ -31,22 +31,31 @@
               <select class="form-control" name="category">
                 <option value="none">Select a Category</option>
                 {% for category in categories %}
-                  <option value="{{category.id}}">{{category.name}}</option>
+                <option value="{{category.id}}">{{category.name}}</option>
                 {% endfor %}
               </select>
 
             </div>
-
             <div class="form-group m-3">
               <label>Style</label>
 
               <select class="form-control" name="style">
                 <option value="none">Select the style</option>
                 {% for style in styles %}
-                  <option value="{{style.id}}">{{style.name}}</option>
+                <option value="{{style.id}}">{{style.name}}</option>
                 {% endfor %}
               </select>
 
+            </div>
+
+            <div class="multi_select_box">
+              <select class="selectpicker" multiple>
+                <option>Causual</option>
+                <option>Causual</option>
+                <option>Causual</option>
+                <option>Causual</option>
+                <option>Causual</option>
+              </select>
             </div>
 
             <div class="form-group m-3">

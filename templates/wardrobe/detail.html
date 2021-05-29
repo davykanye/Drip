@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html>
 {% load static %}
+
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
@@ -20,11 +21,35 @@
 
 <body>
   <div class="row aa" style="margin-left: 0px;margin-right: 0px;padding-right: 15px;padding-left: 15px;">
-    <div class="col-6 align-self-center"> <a href="{% url 'gallery' %}"><i class="icon ion-ios-arrow-back" style="font-size: 30px;"></i></a> </div>
-    <div class="col text-right align-self-center"><button class="btn btn-sm text-right" type="button"><i class="fa fa-heart-o" style="font-size: 30px;"></i></button></div>
-    <div class="col-12 text-center" style="background-color: #eaeaeb;padding-top: 15px;padding-bottom: 15px;"><img class="img-fluid" src="{{photo.image.url}}"></div>
-    <div class="col-12 align-self-center">
-      <p>Orange T-Shirt</p><button class="btn" type="button" style="background-color: #252525;color: rgb(255,255,255);font-size: 20px;">Use Outfit</button>
+    <div class="col-6 align-self-center">
+      <a href="{% url 'gallery' %}">
+        <i class="icon ion-ios-arrow-back" style="font-size: 30px;"></i>
+      </a>
+    </div>
+    <div class="col text-right align-self-center">
+      <button class="btn btn-sm text-right" type="button">
+        <i class="la la-bookmark-o" style="font-size: 30px;"></i>
+      </button>
+    </div>
+    <div class="col-12 text-center al" style="padding-top: 15px;padding-bottom: 15px;"><img class="img-fluid" src="{{photo.image.url}}" style="padding-top: 15px;padding-right: 15px;padding-bottom: 15px;padding-left: 15px;"></div>
+    <div class="col-12 align-self-center" style="padding-top: 40px;">
+      <div class="row">
+        <div class="col-4" style="padding-right: 0px;padding-left: 0px;">
+          <p>Orange T-Shirt</p>
+        </div>
+        <div class="col-4 text-right" style="padding-right: 0px;padding-left: 0px;">
+          <a href="#">
+            <i class="la la-edit" style="font-size: 30px;"></i>
+            <p>Edit</p>
+          </a>
+        </div>
+        <div class="col-4 text-right" style="padding-right: 0px;padding-left: 0px;">
+          <a href="#">
+            <i class="la la-trash" style="font-size: 30px;"></i>
+            <p>Delete</p>
+          </a>
+        </div>
+      </div>
     </div>
   </div>
   <script src="{% static 'js/jquery.min.js' %}"></script>

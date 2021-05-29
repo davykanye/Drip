@@ -1,15 +1,14 @@
+{% load static %}
 <div class="col" style="padding-right: 0px;padding-left: 0px;">
   <nav class="nav1">
     <a href="{% url 'outfit_feed' %}" class="nav__link">
-      <i class="material-icons nav__icon">home</i>
+      <img src="{% static 'img/home.svg' %}">
     </a>
     <a href="{% url 'search' %}" class="nav__link nav__link--active">
-      <i class="material-icons nav__icon">grid_view</i>
+      <img src="{% static 'img/add.svg' %}">
     </a>
     <a href="{% url 'gallery' %}" class="nav__link">
-      <span class="material-icons">
-        door_sliding
-      </span>
+      <img src="{% static 'img/user.svg' %}">
     </a>
   </nav>
 </div>

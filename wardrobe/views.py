@@ -17,12 +17,16 @@ import random
 @login_required
 def gallery(request):
     user = request.user
-    try:
-        pro = Profile.objects.get(user=user)
-        profile = pro.image.url
-    except ObjectDoesNotExist:
-        profile = None
+    global proc
+    def proc():
+        try:
+            pro = Profile.objects.get(user=request.user)
+            profile = pro.image.url
+        except ObjectDoesNotExist:
+            profile = None
+        return profile
 
+    profile = proc()
     categories = Category.objects.all()
     photos = Photos.objects.filter(user=user)
     outfits = Outfit.objects.all()
@@ -191,23 +195,17 @@ def outfit_feed(request):
                 lower: random.choice(lower),
                 shoes: random.choice(shoes)
                 }
-            elif rand == 2:
+            else:
                 outfit = {
                 head: random.choice(head),
                 top: random.choice(top),
                 lower: random.choice(lower),
                 shoes: random.choice(shoes)
                 }
-            else:
-                outfit = {
-                top: random.choice(top),
-                jacket: random.choice(jacket),
-                lower: random.choice(lower),
-                shoes: random.choice(shoes)
-                }
             outfits.append(outfit)
 
-        context = {'outfits': outfits, 'occassions':occassions, 'category':category}
+        profile = proc()
+        context = {'outfits': outfits, 'occassions':occassions, 'category':category, 'profile':profile}
         template_name = 'wardrobe/outfit_feed.html'
         return render(request, template_name, context)
 
@@ -225,7 +223,7 @@ def search(request):
         query = request.POST['query']
         query = '+'.join(query.split())
     else:
-        query = 'clothes'
+        query = 'grey+shirt'
 
     GOOGLE_IMAGE = \
     'https://www.google.com/search?site=&tbm=isch&source=hp&biw=1873&bih=990&'
