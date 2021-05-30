@@ -52,6 +52,7 @@ class Photos(models.Model):
 
 
 class Outfit(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='outfit', null=True)
     name = models.CharField(max_length=30, blank=True, null=True)
     items = models.ManyToManyField('Photos', related_name='items')
 

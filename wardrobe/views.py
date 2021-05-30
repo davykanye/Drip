@@ -37,7 +37,7 @@ def gallery(request):
 
 
 
-    outfits = Outfit.objects.all()
+    outfits = Outfit.objects.filter(user=user)
 
     context = {'categories': categories, 'photos': photos, 'outfits': outfits, 'user': user, 'profile': profile}
     template_name = 'wardrobe/wardrobe.html'
