@@ -17,8 +17,8 @@ import random
 @login_required
 def gallery(request):
     user = request.user
-    global proc
-    def proc():
+    global prenup
+    def prenup():
         try:
             pro = Profile.objects.get(user=request.user)
             profile = pro.image.url
@@ -26,7 +26,7 @@ def gallery(request):
             profile = None
         return profile
 
-    profile = proc()
+    profile = prenup()
     categories = Category.objects.all()
     photos = Photos.objects.filter(user=user)
     category = request.GET.get('category')
@@ -89,18 +89,14 @@ def edit_pic(request, pk):
 
     if request.method == 'POST':
         data = request.POST
-        image = request.FILES.get('image')
 
         if data['category'] != 'none':
             category = Category.objects.get(id=data['category'])
-        elif data['category_new'] != '':
-            category, created = Category.objects.get_or_create(name=data['category_new'])
         else:
             category = None
 
         photo.category = category
         photo.description = data['description']
-        photo.image = image
         photo.save()
 
         return redirect('gallery')
@@ -212,14 +208,14 @@ def outfit_feed(request):
                 }
             outfits.append(outfit)
 
-        profile = proc()
+        saved_outfit = request.GET.get('outfit')
+        print(saved_outfit)
+        print(type(saved_outfit))
+
+        profile = prenup()
         context = {'outfits': outfits, 'occassions':occassions, 'category':category, 'profile':profile}
         template_name = 'wardrobe/outfit_feed.html'
         return render(request, template_name, context)
-
-@login_required
-def save_outfit(request, outfit):
-    pass
 
 
 @login_required
@@ -283,7 +279,7 @@ def search_item(request, image):
 
     SAVE_FOLDER = 'staticfiles/searched'
     name = proper()
-    id = random.randint(1, 9)
+    id = random.randint(1, 99)
 
     categories = Category.objects.all()
     styles = Style.objects.all()
@@ -312,6 +308,11 @@ def search_item(request, image):
 
     if request.method == 'POST':
         data = request.POST
+        selected_style = request.POST.getlist('style')
+        styles = []
+        for i in selected_style:
+            i = int(i)
+            styles.append(i)
 
         if data['category'] != 'none':
             category = Category.objects.get(id=data['category'])
@@ -324,6 +325,8 @@ def search_item(request, image):
             description=data['description'],
             image=hope,
         )
+        photo.style.set(styles)
+
         return redirect('gallery')
 
 

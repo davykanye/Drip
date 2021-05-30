@@ -26,37 +26,44 @@
 <body class="m-5">
   <div class="row aa" style="margin-left: 0px;margin-right: 0px;padding-right: 15px;padding-left: 15px;">
     <div class="col-12 align-self-center">
-      <button class="btn btn-sm text-left" type="button"><i class="icon ion-ios-arrow-back" style="font-size: 30px;"></i></button>
+      <a href="{% url 'search' %}"><button class="btn btn-sm text-left" type="button"><i class="icon ion-ios-arrow-back" style="font-size: 30px;"></i></button></a>
     </div>
-    <div class="col-12 text-center al" style="padding-top: 15px;padding-bottom: 15px;">
-      <img class="img-fluid" src="{{image}}" style="padding-top: 15px;padding-right: 15px;padding-bottom: 15px;padding-left: 15px;">
-    </div>
-    <div class="col">
-      <input class="border rounded" type="text" placeholder="Title/Name" style="padding-left: 15px;background-color: rgba(234,234,235,0);">
-      <select style="margin-top: 11px;padding-top: 15px;padding-right: 15px;padding-bottom: 15px;padding-left: 15px;">
-        <optgroup label="Categories">
-          <option value="12" selected="">Select a category</option>
-          <option value="13">Category 1</option>
-          <option value="14">Category 2</option>
-        </optgroup>
-      </select>
 
-      <div class="row" style="margin-left: 0px;margin-right: 0px;">
-        <a class="btn" role="button" data-toggle="modal" href="#myModal" style="padding-top: 0px;padding-right: 0px;padding-bottom: 0px;padding-left: 0px;margin-top: 10px;">Style
-          <i class="fa fa-sort-down" style="margin-left: 4px;"></i></a>
-                <div class="modal fade" role="dialog" tabindex="-1" id="myModal">
-                    <div class="modal-dialog modal-dialog-centered" role="document">
-                        <div class="modal-content">
-                            <div class="modal-body text-left">
-                                <div class="form-check" style="margin-top: 15px;margin-bottom: 15px;"><input class="form-check-input" type="checkbox" id="formCheck-1" style="width: 150px;"><label class="form-check-label" for="formCheck-1">Causal</label></div>
-                                <div class="form-check" style="margin-top: 15px;margin-bottom: 15px;"><input class="form-check-input" type="checkbox" id="formCheck-1" style="width: 150px;"><label class="form-check-label" for="formCheck-1">Formal</label></div>
-                                <div class="form-check" style="margin-top: 15px;margin-bottom: 15px;"><input class="form-check-input" type="checkbox" id="formCheck-1" style="width: 150px;"><label class="form-check-label" for="formCheck-1">Business</label></div>
-                            </div>
-                        </div>
-                    </div>
+    <div class="col-12 align-self-center">
+      <form method="POST">
+        {% csrf_token %}
+        <div class="col-12 text-center al" style="padding-top: 15px;padding-bottom: 15px;">
+          <img class="img-fluid" src="{{image}}" style="padding-top: 15px;padding-right: 15px;padding-bottom: 15px;padding-left: 15px;">
+        </div>
+        <div class="col">
+          <input required class="border rounded" name="description" type="text" placeholder="Title/Name" style="padding-left: 15px;background-color: rgba(234,234,235,0);">
+          <select name="category" style="margin-top: 11px;padding-top: 15px;padding-right: 15px;padding-bottom: 15px;padding-left: 15px;">
+            <optgroup label="Categories">
+              {% for category in categories %}
+                <option value="{{category.id}}">{{category.name}}</option>
+              {% endfor %}
+            </optgroup>
+          </select>
+
+          <div class="row" style="margin-left: 0px;margin-right: 0px;">
+            <a class="btn" role="button" data-toggle="modal" href="#myModal" style="padding-top: 0px;padding-right: 0px;padding-bottom: 0px;padding-left: 0px;margin-top: 10px;">Style
+              <i class="fa fa-sort-down" style="margin-left: 4px;"></i></a>
+            <div class="modal fade" role="dialog" tabindex="-1" id="myModal">
+              <div class="modal-dialog modal-dialog-centered" role="document">
+                <div class="modal-content">
+                  <div class="modal-body text-left">
+                    {% for style in styles %}
+                    <div class="form-check" style="margin-top: 15px;margin-bottom: 15px;"><input class="form-check-input" name="style" value="{{style.id}}" type="checkbox" id="formCheck-1" style="width: 150px;"><label class="form-check-label" for="formCheck-1">{{style.name}}</label></div>
+                    {% endfor %}
+                  </div>
                 </div>
-      </div><button class="btn" type="button" style="background-color: #000000;color: rgb(255,255,255);"><strong>Add Item</strong></button>
+              </div>
+            </div>
+          </div><button class="btn" type="submit" style="background-color: #000000;color: rgb(255,255,255);"><strong>Add Item</strong></button>
+        </div>
+      </form>
     </div>
+
   </div>
 
   <script src="{% static 'js/bs-init.js' %}"></script>

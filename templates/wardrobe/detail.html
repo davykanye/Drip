@@ -26,27 +26,23 @@
         <i class="icon ion-ios-arrow-back" style="font-size: 30px;"></i>
       </a>
     </div>
-    <div class="col text-right align-self-center">
-      <button class="btn btn-sm text-right" type="button">
-        <i class="la la-bookmark-o" style="font-size: 30px;"></i>
-      </button>
-    </div>
+
     <div class="col-12 text-center al" style="padding-top: 15px;padding-bottom: 15px;"><img class="img-fluid" src="{{photo.image.url}}" style="padding-top: 15px;padding-right: 15px;padding-bottom: 15px;padding-left: 15px;"></div>
     <div class="col-12 align-self-center" style="padding-top: 40px;">
       <div class="row">
-        <div class="col-4" style="padding-right: 0px;padding-left: 0px;">
+        <div class="col-8" style="padding-right: 0px;padding-left: 0px;">
           <h3><p>{{photo.description}}</p></h3>
         </div>
-        <div class="col-4 text-right" style="padding-right: 0px;padding-left: 0px;">
-          <a href="#">
-            <i class="la la-edit" style="font-size: 30px;"></i>
-            <p>Edit</p>
+
+        <div class="col-2 text-right" style="padding-right: 0px;padding-left: 0px;">
+          <a href="{% url 'edit_pic' photo.id %}">
+            <img src="{% static 'img/edit_black.svg' %}" alt="Edit" style="width: 35px">
           </a>
         </div>
-        <div class="col-4 text-right" style="padding-right: 0px;padding-left: 0px;">
-          <a href="#">
-            <i class="la la-trash" style="font-size: 30px;"></i>
-            <p>Delete</p>
+
+        <div class="col-2 text-right" style="padding-right: 0px;padding-left: 0px;">
+          <a href="{% url 'delete' photo.id %}">
+            <img src="{% static 'img/delete_black.svg' %}" alt="Delete" style="width: 35px">
           </a>
         </div>
       </div>

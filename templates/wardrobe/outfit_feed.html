@@ -50,12 +50,12 @@
 
         <div class="row text-center align-items-center qw" style="margin-right: 0px;margin-left: 0px;">
           {% for key, value in outfit.items %}
-          <div class="col-12" style="padding-top: 15px;padding-bottom: 15px;"><img src="{{value.image.url}}" style="width: 100px;"></div>
+          <div class="col-12" style="padding-top: 5px;padding-bottom: 3px;"><img src="{{value.image.url}}" style="width: 100px;"></div>
           {% endfor %}
         </div>
 
 
-        <div class="col text-right" style="padding-right: 15px;padding-top: 10px;"><a href="{% url 'save_outfit' %}"> <img src="{% static 'img/bookmark.svg' %}" alt="" style="width: 40px;"> </a></div>
+        <div class="col text-right" style="padding-right: 15px;padding-top: 10px;"><a href="{% url 'outfit_feed' %}?outfit={{outfit.items}}"> <img src="{% static 'img/bookmark.svg' %}" alt="" style="width: 40px;"> </a></div>
 
       </div>
      {% empty %}

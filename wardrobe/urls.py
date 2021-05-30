@@ -9,7 +9,6 @@ urlpatterns = [
     path('delete/<str:pk>/', views.delete, name='delete'),
     path('profile', views.profile, name='profile'),
     path('outfit/', views.create_outfit, name='create_outfit'),
-    path('save_outfit/', views.save_outfit, name='save_outfit'),
     path('outfit_feed/', views.outfit_feed, name='outfit_feed'),
     path('outfit_view/', views.outfit_view, name='outfit_view'),
     path('search/', views.search, name='search'),
