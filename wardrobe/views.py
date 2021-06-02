@@ -107,12 +107,6 @@ def edit_pic(request, pk):
 
 
 # deleting clothe items
-@login_required
-def profile(request):
-
-    context = {}
-    template_name = 'wardrobe/Profile.html'
-    return render(request, template_name, context)
 
 # Profile View man
 @login_required
@@ -124,7 +118,11 @@ def delete(request, pk):
     return HttpResponseRedirect('/')
 
 
+def settings(request):
 
+    context = {}
+    template_name = 'wardrobe/settings.html'
+    return render(request, template_name, context)
 ################## OUTFITS SECTION ###############################
 
 # Creating Outfits
@@ -162,14 +160,15 @@ def create_outfit(request):
 def outfit_feed(request):
     user = request.user
     items = Photos.objects.filter(user=user)
+    occassions = Occassion.objects.all()
+    category = Category.objects.all()
     if len(items) <= 3:
         template_name = 'wardrobe/feed_error.html'
-        context = {}
+        context = {'occassions':occassions, 'category':category}
         return render(request, template_name, context)
     else:
         ######### FIlTERING BY STYLES ###########
-        occassions = Occassion.objects.all()
-        category = Category.objects.all()
+
         event = request.GET.get('occassion')
         if event == None:
             pass
@@ -208,14 +207,16 @@ def outfit_feed(request):
                 }
             outfits.append(outfit)
 
+
         saved_outfit = request.GET.get('outfit')
-        print(saved_outfit)
-        print(type(saved_outfit))
+        # print(saved_outfit)
+        # print(type(saved_outfit))
 
         profile = prenup()
         context = {'outfits': outfits, 'occassions':occassions, 'category':category, 'profile':profile}
         template_name = 'wardrobe/outfit_feed.html'
         return render(request, template_name, context)
+
 
 
 @login_required

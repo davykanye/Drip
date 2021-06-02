@@ -24,7 +24,50 @@
 </head>
 
 <body>
-  <marquee> <h1>Everybody chill I will figure it out</h1> </marquee>
+  <form method="POST">
+    {% csrf_token %}
+
+    <header class="bn" style="margin-top: 10px;">
+      <div class="row" style="margin-right: 0px;margin-left: 0px;">
+        <div class="col-2 text-left align-self-center" style="padding-top: 10px;padding-bottom: 6px;"><i class="icon ion-ios-arrow-back" style="font-size: 30px;"></i></div>
+        <div class="col-10 text-left align-self-center" style="padding-top: 10px;padding-bottom: 6px;">
+          <p style="width: 284px;font-size: 20px;margin-bottom: 0px;">Accounts</p>
+        </div>
+      </div>
+    </header>
+    <div class="row" style="margin-top: 70px;margin-right: 0px;margin-left: 0px;">
+      <div class="col-12" style="padding-top: 15px;">
+        <p class="text-center" style="margin-bottom: 0px;">You can make changes to your personal information here</p>
+      </div>
+      <div class="col-12">
+        <div class="">
+          <label>Username</label>
+          {{form.username}}
+        </div>
+
+        <div class="">
+          <label>Email</label>
+          {{form.email}}
+        </div>
+
+        <div class="">
+          <label>first name</label>
+          {{form.first_name}}
+        </div>
+
+        <div class="">
+          <label>Last name</label>
+          {{form.last_name}}
+        </div>
+
+      </div>
+      <div class="col" style="margin-top: 43px;">
+        <button class="btn" type="button" style="background-color: #000000;color: rgb(255,255,255);"><strong>Save</strong></button>
+      </div>
+    </div>
+
+  </form>
+
 </body>
 
 </html>

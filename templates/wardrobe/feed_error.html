@@ -18,35 +18,55 @@
   <link rel="stylesheet" href="{% static 'fonts/fontawesome5-overrides.min.css' %}">
   <link rel="stylesheet" href="{% static 'css/buttom-navigation-1.css' %}">
   <link rel="stylesheet" href="{% static 'css/buttom-navigation.css' %}">
-  <link rel="stylesheet" href="{% static 'css/extra.css' %}">
   <link rel="stylesheet" href="{% static 'css/styles.css' %}">
   <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 </head>
 
-<body>
-  <div class="row" style="margin-left: 0px;margin-right: 0px;margin-top: 20px;margin-bottom: 20px;padding-right: 15px;padding-left: 15px;">
-    <div class="col-3 text-right align-self-center" style="padding-right: 10px;padding-left: 0px;"><i class="far fa-user-circle" style="font-size: 60px;"></i></div>
-    <div class="col-5 text-left align-self-center" style="padding-right: 0px;padding-left: 12px;">
-      <h1>Hi, <br>David</h1>
+<body style="background-color: #ffffff;">
+  <header>
+    <div class="col" style="padding-top: 10px;padding-bottom: 6px;padding-left: 34px;">
+      <a class="ag" href="#">
+        <img src="{% static 'img/dri4.png' %}" style="width: 50px;font-family: 'Campton Book';margin-top: 20px;">
+      </a>
+
     </div>
+  </header>
+  <div class="col-12 ui" style="margin-top: 74px;">
+    <div class="row justify-content-center" style="margin-right: 0px;margin-left: 0px;">
+      {% for occassion in occassions %}
+      <div class="col-3 text-center" style="margin-right: 4px;margin-left: 4px;background-color: #eaebeb;padding-top: 15px;padding-bottom: 0px;">
+        <a href="{% url 'outfit_feed' %}?occassion={{occassion.name}}">
+          <p style="margin-bottom: 0px;">{{occassion.name}}</p>
+        </a>
+      </div>
+      {% empty %}
 
-    {% include 'wardrobe/side_bar.html' %}
+      {% endfor %}
 
+    </div>
   </div>
 
-  <div class="row" style="margin-right: 0px;margin-left: 0px;margin-top: 10px;margin-bottom: 10px;">
-    <div class="error">
-      <h5>It seems you haven't add any clothes. Try adding more clothe please</h5>
+  <main class="hg">
+    <div class="col text-center" style="margin-top: 76px;"><img src="{% static 'img/neutral.svg' %}" style="width: 70px;">
+      <p><h4>No reccommendations</h4></p>
+      <p>Try adding more clothes to your closet or change your search filter</p>
+      <a href="{% url 'gallery' %}"><button class="btn btn-link" type="button" style="color: rgb(255,255,255);background-color: #000000;">My Wardrobe</button></a>
     </div>
-  </div>
+
+
+  </main>
 
   {% include 'wardrobe/bottom_nav.html' %}
 
+  <script src="{% static 'js/bs-init.js' %}"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.1.1/aos.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap-select@1.13.14/dist/js/bootstrap-select.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap-select@1.13.14/dist/js/i18n/defaults-*.min.js"></script>
+  <script src="{% static 'js/Picker.js' %}"></script>
+  <script src="{% static 'js/scroll.js' %}"></script>
   <script src="{% static 'js/jquery.min.js' %}"></script>
   <script src="{% static 'bootstrap/js/bootstrap.min.js' %}"></script>
-  <script src="{% static 'js/disappear.js' %}"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/Swiper/3.3.1/js/swiper.jquery.min.js"></script>
-  <script src="{% static 'js/Simple-Slider.js' %}"></script>
 </body>
 
 </html>

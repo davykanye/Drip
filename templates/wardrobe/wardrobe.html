@@ -27,17 +27,21 @@
 <body>
 
   <div class="row pulse animated kl" style="margin-left: 0px;margin-right: 0px;">
-    <div class="col-6 align-self-center"><a href="#"> <img src="{% static 'img/Drip.png' %}" alt=""  style="width: 70px;"> </a></div>
+    <div class="col-6 align-self-center"><a href="#"> <img src="{% static 'img/Drip.png' %}" alt="" style="width: 70px;"> </a></div>
     <div class="col-6 text-right align-self-center">
-      
+      <a class="btn btn-lg" href="{% url 'settings' %}">
+        <i class="icon-settings" style="font-size: 30px;"></i>
+      </a>
     </div>
-    <div class="col-12 text-center align-self-end gh"><img src="{% static 'img/monkey.jpg' %}" style="width: 90px;"></div>
-    <div class="col-12 align-self-end">
+    {% if profile %}
+    <div class="col-12 text-center align-self-end gh"><img src="{{profile}}" style="width: 90px;"></div>
+    {% else %}
+    <div class="col-12 text-center align-self-end gh"><img src="{% static 'img/Profile.png' %}" style="width: 90px;"></div>
+    {% endif %}
+    <div class="col-12 align-self-end" style="padding-bottom: 20px">
       <h1 class="text-center" style="margin-bottom: 0px;">{{user.username}}</h1>
     </div>
-    <div class="col">
-      <p class="text-center" style="margin-bottom: 0px;color: rgb(115,115,115);font-size: 14px;">Moshood Jimoh Kuku</p>
-    </div>
+
   </div>
   <div class="row jk" style="margin-left: 0px;margin-right: 0px;">
     <div class="col">
@@ -59,44 +63,72 @@
                   </ul>
 
 
-                      <div class="row no" style="margin-right: 0px;margin-left: 0px;padding-top: 10px;padding-bottom: 30px;">
-                        {% for photo in photos %}
-                        <div class="col-4" style="padding-right: 3px;padding-left: 3px;">
-                          <a href="{% url 'photo' photo.id %}"><img src="{{photo.image.url}}"></a>
+                  <div class="row no" style="margin-right: 0px;margin-left: 0px;padding-top: 10px;padding-bottom: 30px;">
+                    {% for photo in photos %}
+                    <div class="col-4" style="padding-right: 3px;padding-left: 3px;">
+                      <a href="{% url 'photo' photo.id %}"><img src="{{photo.image.url}}"></a>
+                    </div>
+                    {% empty %}
+
+                    <div class="col-12">
+                      <div class="tab-content">
+                        <div class="tab-pane fade show active text-center" role="tabpanel" id="tab-3" style="margin-top: 4px;">
+                          <img src="{% static 'img/Drip.png' %}" style="width: 70px;margin-top: 0px;padding-top: 0px;padding-bottom: 10px">
+                          <p style="margin-bottom: 0px;text-align: center;">
+                          <h5>Get started by adding clothes to your closet</h5>
+                          </p>
+                          <a href="{% url 'search' %}"><button class="btn" type="button" style="background-color: #000000;color: rgb(255,255,255);">Add item</button></a>
                         </div>
-                        {% endfor %}
                       </div>
+                    </div>
 
-                  </div>
-                </div>
-              </div>
-            </div>
-<!-- Outfits  -->
-            <div class="tab-pane fade" role="tabpanel" id="tab-2">
-              <div class="row" style="margin-right: 0px;margin-left: 0px;margin-top: 10px;margin-bottom: 10px;">
-                {% for outfit in outfits %}
-                <div class="col-6" style="padding-right: 5px;padding-left: 5px;">
-                  <div class="row hh" style="margin-left: 0px;margin-right: 0px;background: linear-gradient(43deg, #4158d0 0%, #c850c0 46%,#ffcc70 100%);padding-top: 8px;padding-right: 8px;padding-bottom: 8px;padding-left: 8px;">
-                    {% for i in outfit.clothes %}
-                    <div class="col-6 text-center" style="padding-top: 15px;padding-bottom: 15px;"><a href="#"><img class="img-fluid" src="{{i.image.url}}"></a></div>
+
                     {% endfor %}
-
                   </div>
-                </div>
-                {% empty %}
-                <h1>qweerrty</h1>
-                {% endfor %}
-              </div>
 
+                </div>
+              </div>
             </div>
           </div>
+          <!-- Outfits  -->
+          <div class="tab-pane fade" role="tabpanel" id="tab-2">
+            <div class="row" style="margin-right: 0px;margin-left: 0px;margin-top: 10px;margin-bottom: 10px;">
+              {% for outfit in outfits %}
+              <div class="col-6" style="padding-right: 5px;padding-left: 5px;">
+                <div class="row hh" style="margin-left: 0px;margin-right: 0px;background: linear-gradient(43deg, #4158d0 0%, #c850c0 46%,#ffcc70 100%);padding-top: 8px;padding-right: 8px;padding-bottom: 8px;padding-left: 8px;">
+                  {% for i in outfit.clothes %}
+                  <div class="col-6 text-center" style="padding-top: 15px;padding-bottom: 15px;"><a href="#"><img class="img-fluid" src="{{i.image.url}}"></a></div>
+                  {% endfor %}
 
+                </div>
+              </div>
+              {% empty %}
+
+              <div class="col-12">
+                <div class="tab-content">
+                  <div class="tab-pane fade show active text-center" role="tabpanel" id="tab-3" style="margin-top: 44px;">
+                    <img src="{% static 'img/Drip.png' %}" style="width: 70px;">
+                    <p style="margin-bottom: 0px;text-align: center;">
+                    <h5>You havent saved any outfits yet</h5>
+                    </p>
+                    <a href="{% url 'outfit_feed' %}"><button class="btn" type="button" style="background-color: #000000;color: rgb(255,255,255);">Reccommendations</button></a>
+                  </div>
+                </div>
+              </div>
+
+
+              {% endfor %}
+            </div>
+
+          </div>
         </div>
+
       </div>
     </div>
   </div>
+  </div>
 
- {% include 'wardrobe/bottom_nav.html' %}
+  {% include 'wardrobe/bottom_nav.html' %}
 
   <script src="{% static 'js/bs-init.js' %}"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.1.1/aos.js"></script>
