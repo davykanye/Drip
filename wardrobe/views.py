@@ -198,6 +198,13 @@ def outfit_feed(request):
                 lower: random.choice(lower),
                 shoes: random.choice(shoes)
                 }
+            elif rand == 2:
+                outfit = {
+                jacket: random.choice(jacket),
+                top: random.choice(top),
+                lower: random.choice(lower),
+                shoes: random.choice(shoes)
+                }
             else:
                 outfit = {
                 head: random.choice(head),
