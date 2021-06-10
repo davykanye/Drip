@@ -36,8 +36,8 @@
           <img class="img-fluid" src="{{image}}" style="padding-top: 15px;padding-right: 15px;padding-bottom: 15px;padding-left: 15px;">
         </div>
         <div class="col">
-          <input required class="border rounded" name="description" type="text" placeholder="Title/Name" style="padding-left: 15px;background-color: rgba(234,234,235,0);">
-          <select name="category" style="margin-top: 11px;padding-top: 15px;padding-right: 15px;padding-bottom: 15px;padding-left: 15px;">
+
+          <select required name="category" style="margin-top: 11px;padding-top: 15px;padding-right: 15px;padding-bottom: 15px;padding-left: 15px;">
             <optgroup label="Categories">
               {% for category in categories %}
                 <option value="{{category.id}}">{{category.name}}</option>

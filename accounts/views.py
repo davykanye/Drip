@@ -7,6 +7,7 @@ from accounts.forms import (EditProfileForm)
 from django.contrib.auth.forms import UserChangeForm
 from django.contrib.auth.decorators import login_required
 from django.urls import reverse
+from wardrobe.models import Profile
 import requests
 
 # Create your views here.
@@ -71,6 +72,16 @@ def profile(request):
         context = {'form': form}
         template_name = 'wardrobe/Profile.html'
         return render(request, template_name, context)
+
+def profile_pic(request):
+    user =  request.user
+    dp = Profile.objects.get_or_create(user=user)
+    if request.method == 'POST':
+        return redirect('gallery')
+
+    context = {}
+    template_name = 'accounts/profile_pic.html'
+    return render(request, template_name, context)
 
 def logout(request):
     auth.logout(request)

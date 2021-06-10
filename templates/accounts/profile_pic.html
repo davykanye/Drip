@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+{% load static %}
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+  <title>Profile Picture</title>
+  <link rel="stylesheet" href="{% static 'bootstrap/css/bootstrap.min.css' %}">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Alegreya+Sans">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Alegreya+Sans+SC">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Allerta">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Allerta+Stencil">
+  <link rel="stylesheet" href="{% static 'fonts/fontawesome-all.min.css' %}">
+  <link rel="stylesheet" href="{% static 'fonts/font-awesome.min.css' %}">
+  <link rel="stylesheet" href="{% static 'fonts/ionicons.min.css' %}">
+  <link rel="stylesheet" href="{% static 'fonts/material-icons.min.css' %}">
+  <link rel="stylesheet" href="{% static 'fonts/fontawesome5-overrides.min.css' %}">
+  <link rel="stylesheet" href="{% static 'css/buttom-navigation.css' %}">
+  <link rel="stylesheet" href="{% static 'css/styles.css' %}">
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+</head>
+
+<body>
+
+  <form method="POST" enctype='multipart/form-data'>
+
+    {% csrf_token %}
+
+    <div class="form-group m-3">
+      <label>Upload image</label>
+
+      <input required name="image" type="file" multiple class="form-control-file">
+
+    </div>
+
+
+
+    <button type='submit' class="btn btn-primary m-3">Submit</button>
+
+  </form>
+
+</body>
+
+</html>

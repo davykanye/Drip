@@ -11,6 +11,7 @@ from io import BytesIO
 from PIL import Image
 from django.core.files.uploadedfile import InMemoryUploadedFile
 import requests
+from ast import literal_eval
 import random
 
 # Create your views here.
@@ -128,7 +129,7 @@ def settings(request):
 # Creating Outfits
 @login_required
 def create_outfit(request):
-    photos = Photos.objects.all()
+    photos = Photos.objects.filter(user=request.user)
 
     if request.method == 'POST':
         data = request.POST
@@ -140,9 +141,9 @@ def create_outfit(request):
 
         #then create outfit in the models
 
-        outfit_name = data['name']
+        outfit_name = 'wow'
 
-        outfit = Outfit.objects.create(name = outfit_name)
+        outfit = Outfit.objects.create(user=request.user, name = outfit_name)
         outfit.items.set(items)
 
         return redirect('gallery')
@@ -162,31 +163,29 @@ def outfit_feed(request):
     items = Photos.objects.filter(user=user)
     occassions = Occassion.objects.all()
     category = Category.objects.all()
-    if len(items) <= 3:
-        template_name = 'wardrobe/feed_error.html'
-        context = {'occassions':occassions, 'category':category}
-        return render(request, template_name, context)
+
+    ######### FIlTERING BY STYLES ###########
+
+    event = request.GET.get('occassion')
+    if event == None:
+        pass
     else:
-        ######### FIlTERING BY STYLES ###########
+        event = Occassion.objects.get(name=str(event))
+        styles = event.styles.all()
 
-        event = request.GET.get('occassion')
-        if event == None:
-            pass
-        else:
-            event = Occassion.objects.get(name=str(event))
-            styles = event.styles.all()
+        items = items.filter(style__name__in=list(styles))
+        print(items)
+        print(len(items))
 
-            items = items.filter(style__name__in=list(styles))
-            print(items)
-            print(len(items))
-
+    try:
         head = items.filter(category__name='headwear')
         top = items.filter(category__name='top')
         jacket = items.filter(category__name='jacket')
         lower = items.filter(category__name='lower')
         shoes = items.filter(category__name='shoes')
 
-    #  ############# PERMUTATING THE OUTFITS PROPERLY ###################
+        #  ############# PERMUTATING THE OUTFITS PROPERLY ###################
+
         outfits = []
         pick = [1,1,1,1,1,2,2,3,3,3]
 
@@ -194,34 +193,42 @@ def outfit_feed(request):
             rand = random.choice(pick)
             if rand == 1:
                 outfit = {
-                top: random.choice(top),
-                lower: random.choice(lower),
-                shoes: random.choice(shoes)
-                }
-            elif rand == 2:
-                outfit = {
-                jacket: random.choice(jacket),
-                top: random.choice(top),
-                lower: random.choice(lower),
-                shoes: random.choice(shoes)
-                }
+                'top': random.choice(top),
+                'lower': random.choice(lower),
+                'shoes': random.choice(shoes)
+                    }
             else:
                 outfit = {
-                head: random.choice(head),
-                top: random.choice(top),
-                lower: random.choice(lower),
-                shoes: random.choice(shoes)
+                'head': random.choice(head),
+                'top': random.choice(top),
+                'lower': random.choice(lower),
+                'shoes': random.choice(shoes)
                 }
-            outfits.append(outfit)
+                outfits.append(outfit)
+
+        saved = request.GET.get('test')
+        try:
+            print(saved)
+            dls = saved.split(',')
+            ids = [int(i) for i in dls if i != '']
+            print(ids)
+
+            outfit_name = 'saved_outfit'
+
+            outfit = Outfit.objects.create(user=request.user, name=outfit_name)
+            outfit.items.set(ids)
 
 
-        saved_outfit = request.GET.get('outfit')
-        # print(saved_outfit)
-        # print(type(saved_outfit))
+        except Exception as e:
+            print(str(e))
 
-        profile = prenup()
-        context = {'outfits': outfits, 'occassions':occassions, 'category':category, 'profile':profile}
+        # profile = prenup()
+        context = {'outfits': outfits, 'occassions':occassions, 'category':category}
         template_name = 'wardrobe/outfit_feed.html'
+        return render(request, template_name, context)
+    except Exception as e:
+        context = {'categories':category, 'occassions':occassions}
+        template_name = 'wardrobe/feed_error.html'
         return render(request, template_name, context)
 
 
@@ -318,6 +325,7 @@ def search_item(request, image):
         data = request.POST
         selected_style = request.POST.getlist('style')
         styles = []
+        name = 'saved_picture'
         for i in selected_style:
             i = int(i)
             styles.append(i)
@@ -330,7 +338,7 @@ def search_item(request, image):
         photo = Photos.objects.create(
             user = request.user,
             category = category,
-            description=data['description'],
+            description=name,
             image=hope,
         )
         photo.style.set(styles)

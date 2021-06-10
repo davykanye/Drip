@@ -11,7 +11,7 @@ class Category(models.Model):
 
 class Profile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE, primary_key=True)
-    image = models.ImageField(null=False, blank=False)
+    image = models.ImageField(null=True, blank=True)
 
     def __str__(self):
         return self.user.username
