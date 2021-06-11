@@ -261,6 +261,17 @@ a {
   padding: 1px;
 }
 
+.cunt {
+  display: flex;
+  justify-content: space-evenly;
+}
+
+.tip {
+   padding: 15px;
+   text-decoration: none;
+   color: #000;
+}
+
 #p1 {
   height: 15px;
   margin-top: 0px;
@@ -304,7 +315,7 @@ a {
 }
 
 .row.qw {
-  background-image: linear-gradient(43deg, #4158d0 0%, #c850c0 46%,#ffcc70 100%);
+  background: #EFEFEF;
   border-radius: 15px;
 }
 
@@ -432,9 +443,9 @@ header {
 }
 
 .row.nm {
-  background: linear-gradient(43deg, #4158d0 0%, #c850c0 46%,#ffcc70 100%);
+  background: #EFEFEF;
   border-radius: 15px;
-  padding-bottom: 10px;
+  padding-bottom: 25px;
 }
 
 .col-12.align-self-center.w {
@@ -736,4 +747,3 @@ button.btn.dropdown-toggle.btn-light.bs-placeholder {
   outline: none;
   padding: 15px;
 }
-
