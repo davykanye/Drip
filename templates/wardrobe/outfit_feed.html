@@ -34,7 +34,7 @@
   <div class="col-12 ui" style="margin-top: 74px;">
     <div class="cunt" style="margin-right: 0px;margin-left: 0px;">
       {% for occassion in occassions %}
-        <a href="#" class="tip">
+        <a href="{% url 'outfit_feed' %}?outfit={{outfit}}" class="tip">
           <p>{{occassion.name}}</p>
         </a>
       {% empty %}
@@ -55,9 +55,9 @@
 
       </div>
 
-      <div class="col-3" style="left: 250px;padding-top: 0px;">
+      <div class="col-3" style="left: 79%;padding-top: 0px;">
         <button type="button" style="opacity: 100;" class="btn" id="{{ forloop.counter0 }}" name="button">
-          <img src="{% static 'img/bookmark.svg' %}" alt="" style="width: 40px;">
+          <img src="{% static 'img/bb.svg' %}" alt="" style="width: 25px;">
         </button>
       </div>
 

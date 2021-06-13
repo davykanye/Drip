@@ -197,6 +197,7 @@ def outfit_feed(request):
                 'lower': random.choice(lower),
                 'shoes': random.choice(shoes)
                     }
+                outfits.append(outfit)    
             else:
                 outfit = {
                 'head': random.choice(head),
