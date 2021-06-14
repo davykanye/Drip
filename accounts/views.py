@@ -31,7 +31,7 @@ def register(request):
                 user.save()
                 auth.login(request, user)
                 print('user created')
-                return redirect('gallery')
+                return redirect('tutorial')
 
 
         else:
@@ -59,6 +59,11 @@ def login(request):
 
     template_name = 'accounts/login.html'
     return render(request, template_name)
+
+def tutorial(request):
+    context = {}
+    template_name = 'accounts/tutorial.html'
+    return render(request, template_name, context)
 
 def profile(request):
     form = EditProfileForm(request.POST, instance=request.user)

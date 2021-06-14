@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+{% load static %}
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-select@1.13.14/dist/css/bootstrap-select.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.2/animate.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.1.1/aos.css">
+  <link rel="stylesheet" href="{% static 'css/tute.css' %}">
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <title>Document</title>
+</head>
+
+<body>
+
+  <div class="noah">
+
+
+    <section class="n">
+      <a href="{% url 'gallery' %}">
+        <p class="jk">Skip</p>
+      </a>
+      <h1>Welcome to Drip</h1>
+      <img src="{% static 'images/1.png' %}">
+      <p class="hg">To start getting reccomendations from drip, please add items(clothes) to your closet by clicking on the add item button below. </p>
+      <lord-icon
+    src="https://cdn.lordicon.com/qvzrpodt.json"
+    trigger="loop"
+    colors="primary: #0000,secondary:#ffd900"
+    style="width:100px;height:100px;">
+</lord-icon>
+
+    </section>
+
+    <section class="n">
+      <a href="{% url 'gallery' %}">
+        <p class="jk">Skip</p>
+      </a>
+      <h1>Welcome to Drip</h1>
+      <img src="{% static 'images/2.png' %}">
+      <p class="hg">Search for clothes you have in your actual closet and then click on add item button to add it to your virtual closet. </p>
+      <lord-icon
+    src="https://cdn.lordicon.com/qvzrpodt.json"
+    trigger="loop"
+    colors="primary: #ffd900,secondary:#00000"
+    style="width:100px;height:100px; transfrom: rotate(180deg)">
+</lord-icon>
+    </section>
+
+    <section class="n">
+      <a href="{% url 'gallery' %}">
+        <p class="jk">Skip</p>
+      </a>
+      <h1>Welcome to Drip</h1>
+      <img src="{% static 'images/3.png' %}">
+      <p class="hg">Click on the drop down and select the style associated with the cloth you want to add to your closet. </p>
+      <lord-icon
+    src="https://cdn.lordicon.com/qvzrpodt.json"
+    trigger="loop"
+    colors="primary: #ffd900,secondary:#00000"
+    style="width:100px;height:100px; transfrom: rotate(180deg)">
+</lord-icon>
+    </section>
+    
+    <section class="n">
+      <a href="{% url 'gallery' %}">
+        <p class="jk"></p>
+      </a>
+      <h1>Welcome to Drip</h1>
+      <img src="{% static 'images/2.png' %}">
+      <p class="hg">You can view all your items(clothes) and outfits by clicking on the Items and Outfits tabs. </p>
+      <a href="{% url 'gallery' %}">
+        <button type="button">Next</button>
+      </a>
+    </section>
+
+  </div>
+
+  <script src="https://cdn.lordicon.com/libs/frhvbuzj/lord-icon-2.0.2.js"></script>
+<script src="https://cdn.lordicon.com/libs/frhvbuzj/lord-icon-2.0.2.js"></script>
+<script src="https://cdn.lordicon.com/libs/frhvbuzj/lord-icon-2.0.2.js"></script>
+<script src="https://cdn.lordicon.com/libs/frhvbuzj/lord-icon-2.0.2.js"></script>
+</body>
+
+</html>
