@@ -60,6 +60,12 @@ def login(request):
     template_name = 'accounts/login.html'
     return render(request, template_name)
 
+def index(request):
+    
+    context = {}
+    template_name = 'accounts/index.html'
+    return render(request, template_name, context)
+
 def tutorial(request):
     context = {}
     template_name = 'accounts/tutorial.html'

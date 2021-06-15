@@ -180,7 +180,7 @@ PWA_APP_LANG = 'en-US'
 ############ LOGIN_STUFF #########
 LOGIN_REDIRECT_URL = 'gallery'
 
-LOGIN_URL = 'login'
+LOGIN_URL = 'index'
 
 ##############
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
