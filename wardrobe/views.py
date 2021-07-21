@@ -1,5 +1,5 @@
 from django.shortcuts import render, redirect
-from wardrobe.models import Category, Style, Photos, Outfit, Occassion, Profile
+from wardrobe.models import *
 from django.shortcuts import (get_object_or_404, HttpResponseRedirect)
 from django.contrib.auth.decorators import login_required
 from django.urls import reverse
@@ -13,7 +13,7 @@ from django.core.files.uploadedfile import InMemoryUploadedFile
 import requests
 from ast import literal_eval
 import random
-
+import pandas as pd
 # Create your views here.
 @login_required
 def gallery(request):
@@ -30,6 +30,9 @@ def gallery(request):
     profile = prenup()
     categories = Category.objects.all()
     photos = Photos.objects.filter(user=user)
+
+    tit = pd.DataFrame(photos)
+    print(tit)
     category = request.GET.get('category')
     if category == None:
         pass
@@ -124,6 +127,19 @@ def settings(request):
     context = {}
     template_name = 'wardrobe/settings.html'
     return render(request, template_name, context)
+
+def feedback(request):
+    try:
+        data = request.GET.get('feedback')
+
+        feedback = FeedBack.objects.create(
+        user = request.user,
+        rating = rating,
+        message = message
+        )
+    except Exception as e:
+        print(e)
+
 ################## OUTFITS SECTION ###############################
 
 # Creating Outfits
@@ -164,7 +180,7 @@ def outfit_feed(request):
     occassions = Occassion.objects.all()
     category = Category.objects.all()
 
-    ######### FIlTERING BY STYLES ###########
+    ######### FIlTERING BY STYLES ##########
 
     event = request.GET.get('occassion')
     if event == None:
@@ -197,7 +213,7 @@ def outfit_feed(request):
                 'lower': random.choice(lower),
                 'shoes': random.choice(shoes)
                     }
-                outfits.append(outfit)    
+                outfits.append(outfit)
             else:
                 outfit = {
                 'head': random.choice(head),

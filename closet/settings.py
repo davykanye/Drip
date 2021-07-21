@@ -86,17 +86,14 @@ WSGI_APPLICATION = 'closet.wsgi.application'
 
 # DATABASES = {
 #     'default': {
-#         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-#         'NAME': 'drip',
-#         'USER': 'postgres',
-#         'PASSWORD': 'vivalasvegan1A',
-#         'HOST': 'localhost',
-#         'PORT': '5432',
+#         'ENGINE': 'django.db.backends.sqlite3',
+#         'NAME': BASE_DIR / 'db.sqlite3',
 #     }
 # }
 
 DATABASES = {
-    'default': dj_database_url.parse('postgres://afmfncozmovoiv:a655616e3b4bea6d6f7e984d5896a54c0082acc6826d58ed79e936724f28c053@ec2-35-171-250-21.compute-1.amazonaws.com:5432/deefqqa8lnitsi')
+    'default': dj_database_url.parse('postgres://afmfncozmovoiv:a655616e3b4bea6d6f7e984d5896a54c0082acc6826d58ed79e936724f28c053@ec2-35-171-250-21.compute-1.amazonaws.com:5432/deefqqa8lnitsi'),
+
 }
 
 
