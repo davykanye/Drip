@@ -23,6 +23,7 @@ from wardrobe.algorithm import *
 
 @login_required
 def gallery(request):
+    start = time.time()
     user = request.user
     pro = Profile.objects.get(user=request.user)
 
@@ -30,15 +31,11 @@ def gallery(request):
     categories = Category.objects.all()
     photos = Photos.objects.filter(user=user)
 
-    start = time.time()
-    tt = photos.values()
-    data = pd.DataFrame(tt)
-    data = data.drop(['user_id', 'image', 'description', 'category_id'], axis=1)
 
+    styles = get_styles(photos)
+    data = pd.DataFrame(list(styles.items()), columns=['id', 'style'])
     print(data)
-    end = time.time()
-    time_taken = end - start
-    print(time_taken)
+
 
 
     category = request.GET.get('category')
@@ -53,6 +50,9 @@ def gallery(request):
 
     context = {'categories': categories, 'photos': photos, 'outfits': outfits, 'user': user, 'profile': profile}
     template_name = 'wardrobe/wardrobe.html'
+    end = time.time()
+    time_taken = end - start
+    print(time_taken)
     return render(request, template_name, context)
 
 # adding clothe items
@@ -87,9 +87,15 @@ def add_pic(request):
 # viewing clothe items
 @login_required
 def detail(request, pk):
+    start = time.time()
     photo = Photos.objects.get(id=pk)
-    context = {'photo' : photo}
+    styles = photo.styles
+    context = {'photo' : photo, 'styles': styles}
     template_name = 'wardrobe/detail.html'
+
+    end = time.time()
+    time_taken = end - start
+    print(time_taken)
     return render(request, template_name, context)
 
 # editing clothe items
