@@ -1,5 +1,4 @@
 from waitress import serve
-
 from closet.wsgi import application
 
 if __name__ == '__main__':

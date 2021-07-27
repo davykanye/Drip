@@ -16,6 +16,10 @@ class Profile(models.Model):
     def __str__(self):
         return self.user.username
 
+    def picture(self):
+        return self.image.url
+
+
     def admin_photo(self):
         return mark_safe('<img src="{}" width="100" />'.format(self.image.url))
     admin_photo.allow_tags = True
@@ -50,6 +54,9 @@ class Photos(models.Model):
     def __str__(self):
         return self.description
 
+    @property
+    def styles(self):
+        return self.style.all()
 
 class Outfit(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='outfit', null=True)

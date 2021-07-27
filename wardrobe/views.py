@@ -4,6 +4,7 @@ from django.shortcuts import (get_object_or_404, HttpResponseRedirect)
 from django.contrib.auth.decorators import login_required
 from django.urls import reverse
 from django.core.exceptions import ObjectDoesNotExist
+###########################################
 import os
 import json
 from bs4 import BeautifulSoup
@@ -14,25 +15,32 @@ import requests
 from ast import literal_eval
 import random
 import pandas as pd
+import time
+from wardrobe.algorithm import *
 # Create your views here.
+
+
+
 @login_required
 def gallery(request):
     user = request.user
-    global prenup
-    def prenup():
-        try:
-            pro = Profile.objects.get(user=request.user)
-            profile = pro.image.url
-        except ObjectDoesNotExist:
-            profile = None
-        return profile
+    pro = Profile.objects.get(user=request.user)
 
-    profile = prenup()
+    profile = pro.picture()
     categories = Category.objects.all()
     photos = Photos.objects.filter(user=user)
 
-    tit = pd.DataFrame(photos)
-    print(tit)
+    start = time.time()
+    tt = photos.values()
+    data = pd.DataFrame(tt)
+    data = data.drop(['user_id', 'image', 'description', 'category_id'], axis=1)
+
+    print(data)
+    end = time.time()
+    time_taken = end - start
+    print(time_taken)
+
+
     category = request.GET.get('category')
     if category == None:
         pass
@@ -80,7 +88,6 @@ def add_pic(request):
 @login_required
 def detail(request, pk):
     photo = Photos.objects.get(id=pk)
-    print(type(photo.image))
     context = {'photo' : photo}
     template_name = 'wardrobe/detail.html'
     return render(request, template_name, context)
