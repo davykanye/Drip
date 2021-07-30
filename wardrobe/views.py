@@ -14,12 +14,10 @@ from django.core.files.uploadedfile import InMemoryUploadedFile
 import requests
 from ast import literal_eval
 import random
-import pandas as pd
+from pandas import DataFrame
 import time
 from wardrobe.algorithm import *
 # Create your views here.
-
-
 
 @login_required
 def gallery(request):
@@ -30,13 +28,6 @@ def gallery(request):
     profile = pro.picture()
     categories = Category.objects.all()
     photos = Photos.objects.filter(user=user)
-
-
-    styles = get_styles(photos)
-    data = pd.DataFrame(list(styles.items()), columns=['id', 'style'])
-    print(data)
-
-
 
     category = request.GET.get('category')
     if category == None:
@@ -64,8 +55,6 @@ def add_pic(request):
     if request.method == 'POST':
         data = request.POST
         image = request.FILES.get('image')
-        print(type(image))
-        print(image)
 
         if data['category'] != 'none':
             category = Category.objects.get(id=data['category'])
@@ -193,73 +182,15 @@ def outfit_feed(request):
     occassions = Occassion.objects.all()
     category = Category.objects.all()
 
+    styles = get_styles(items)
+    data = DataFrame(list(styles.items()), columns=['id', 'style'])
+    print(data)
     ######### FIlTERING BY STYLES ##########
 
-    event = request.GET.get('occassion')
-    if event == None:
-        pass
-    else:
-        event = Occassion.objects.get(name=str(event))
-        styles = event.styles.all()
 
-        items = items.filter(style__name__in=list(styles))
-        print(items)
-        print(len(items))
-
-    try:
-        head = items.filter(category__name='headwear')
-        top = items.filter(category__name='top')
-        jacket = items.filter(category__name='jacket')
-        lower = items.filter(category__name='lower')
-        shoes = items.filter(category__name='shoes')
-
-        #  ############# PERMUTATING THE OUTFITS PROPERLY ###################
-
-        outfits = []
-        pick = [1,1,1,1,1,2,2,3,3,3]
-
-        for i in range(8):
-            rand = random.choice(pick)
-            if rand == 1:
-                outfit = {
-                'top': random.choice(top),
-                'lower': random.choice(lower),
-                'shoes': random.choice(shoes)
-                    }
-                outfits.append(outfit)
-            else:
-                outfit = {
-                'head': random.choice(head),
-                'top': random.choice(top),
-                'lower': random.choice(lower),
-                'shoes': random.choice(shoes)
-                }
-                outfits.append(outfit)
-
-        saved = request.GET.get('test')
-        try:
-            print(saved)
-            dls = saved.split(',')
-            ids = [int(i) for i in dls if i != '']
-            print(ids)
-
-            outfit_name = 'saved_outfit'
-
-            outfit = Outfit.objects.create(user=request.user, name=outfit_name)
-            outfit.items.set(ids)
-
-
-        except Exception as e:
-            print(str(e))
-
-        # profile = prenup()
-        context = {'outfits': outfits, 'occassions':occassions, 'category':category}
-        template_name = 'wardrobe/outfit_feed.html'
-        return render(request, template_name, context)
-    except Exception as e:
-        context = {'categories':category, 'occassions':occassions}
-        template_name = 'wardrobe/feed_error.html'
-        return render(request, template_name, context)
+    context = {'outfits': outfits, 'occassions':occassions, 'category':category}
+    template_name = 'wardrobe/outfit_feed.html'
+    return render(request, template_name, context)
 
 
 

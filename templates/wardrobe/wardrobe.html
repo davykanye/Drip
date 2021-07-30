@@ -66,7 +66,7 @@
                   <div class="row no" style="margin-right: 0px;margin-left: 0px;padding-top: 10px;padding-bottom: 50px;">
                     {% for photo in photos %}
                     <div class="col-4" style="padding-right: 3px;padding-left: 3px;">
-                      <a href="{% url 'photo' photo.id %}"><img src="{{photo.image.url}}"></a>
+                      <a href="{% url 'photo' photo.id %}"><img src="{{photo.image.url}}" alt="{% static 'img/Profile.png' %}"></a>
                     </div>
                     {% empty %}
 
