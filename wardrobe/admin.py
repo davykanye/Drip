@@ -8,7 +8,7 @@ class OutfitAdmin(admin.ModelAdmin):
     pass
 
 class PhotosAdmin(admin.ModelAdmin):
-    list_display = ['admin_photo', 'user','description', 'category']
+    list_display = ['admin_photo', 'user','description', 'category',]
     list_filter = ['user', 'style', 'category']
 
 class ProfileAdmin(admin.ModelAdmin):

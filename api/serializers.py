@@ -6,3 +6,15 @@ class ItemSerializer(serializers.ModelSerializer):
     class Meta:
         model = Photos
         fields = '__all__'
+
+
+class OutfitSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Outfit
+        fields = '__all__'
+
+
+class StyleSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Style
+        fields = '__all__'
