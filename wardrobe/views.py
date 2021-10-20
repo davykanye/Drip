@@ -14,7 +14,6 @@ from django.core.files.uploadedfile import InMemoryUploadedFile
 import requests
 from ast import literal_eval
 import random
-from pandas import DataFrame
 import time
 from wardrobe.algorithm import *
 from sklearn.feature_extraction.text import CountVectorizer
