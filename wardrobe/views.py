@@ -189,7 +189,7 @@ def outfit_feed(request):
         outfit = make_outfit(seed, items)
         outfits.append(outfit)
     time_taken = time.time() - start_time
-    
+
     print('The outfits of the day is', outfits)
     print(time_taken)
 
