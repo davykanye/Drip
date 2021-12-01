@@ -182,17 +182,22 @@ def outfit_feed(request):
     user = request.user
     items = Photos.objects.filter(user=user)
     ######### FIlTERING BY STYLES ##########
-    seed = 11
+    seeds = pick_seeds(items)
     outfits = []
-    for i in range(5):
+    for key, value in seeds.items():
+        print(key, '->', random.choice(value).id)
+        seed =  random.choice(value).id
         outfit = make_outfit(seed, items)
+        outfit.update({"Occassion": key})
         outfits.append(outfit)
-    time_taken = time.time() - start_time
 
+    time_taken = time.time() - start_time
+    #
     print('The outfits of the day is', outfits)
+    # print(seeds)
     print(time_taken)
 
-    context = {'outfits': outfits}
+    context = {}
     template_name = 'wardrobe/outfit_feed.html'
     return render(request, template_name, context)
 

@@ -67,7 +67,7 @@
                     {% for photo in photos %}
                     <div class="col-4" style="padding-right: 3px;padding-left: 3px;">
                       <a href="{% url 'photo' photo.id %}"><img src="{{photo.image.url}}" onerror="this.src={% static 'img/Profile.png' %}"></a>
-                      <a href="{% url 'photo' photo.id %}"><img src="{{photo.image.url}}"></a>
+                      <!-- <a href="{% url 'photo' photo.id %}"><img src="{{photo.image.url}}"></a> -->
                     </div>
                     {% empty %}
 

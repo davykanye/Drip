@@ -38,7 +38,6 @@ class Occassion(models.Model):
     def __str__(self):
         return self.name
 
-
 class Photos(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='Items', null=True)
     category = models.ForeignKey(Category, on_delete=models.SET_NULL, null=True, blank=True)

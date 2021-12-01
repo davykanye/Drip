@@ -24,5 +24,6 @@ def search_item(link):
     hope = InMemoryUploadedFile(
     image_bytes, None, name, 'image/png', None, None, None
     )
+    output = [hope, photo]
 
-    return hope
+    return output

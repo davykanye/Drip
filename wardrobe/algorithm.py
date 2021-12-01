@@ -47,7 +47,8 @@ def outfit_template(items):
     lower = items.filter(category__name='lower')
     shoes = items.filter(category__name='shoes')
 
-    hashmap = {'headwear': get_ids(headwear), 'top': get_ids(top), 'lower': get_ids(lower), 'shoes': get_ids(shoes)}
+    options = [{'headwear': get_ids(headwear),'top': get_ids(top), 'lower': get_ids(lower), 'shoes': get_ids(shoes)}, {'top': get_ids(top), 'lower': get_ids(lower), 'shoes': get_ids(shoes)}]
+    hashmap = random.choice(options)  #{'headwear': get_ids(headwear),'top': get_ids(top), 'lower': get_ids(lower), 'shoes': get_ids(shoes)}
 
     return hashmap
 
@@ -71,8 +72,6 @@ def make_outfit(seed, items):
 
     return outfit
 
-
-
 def compare(seed, pair):
     seed_item = Photos.objects.get(id=seed)
     pair_item = Photos.objects.get(id=pair)
@@ -90,3 +89,44 @@ def compare(seed, pair):
         truth = False
 
     return truth
+
+################ THIS SECTION IS FOR PICKING SEEDS AND EVENTS ##############
+
+def get_profile(look):
+    styles = look.styles.all()
+    feature = [i.name for i in styles]
+    combine_features = " ".join(feature)
+
+    return combine_features
+
+def check(look_profile, item):
+    item_profile = get_features(item)
+
+    vectors = CountVectorizer().fit_transform([look_profile, item_profile])
+    matrix = cosine_similarity(vectors)
+
+    output = round(matrix[1][0] * 100, 2)
+    if output > 60:
+        truth = True
+    else:
+        truth = False
+
+    return truth
+
+def pick_seeds(items):
+    looks = Occassion.objects.all()
+    seeds = {}
+    for look in looks:
+        seed = get_seed(look, items)
+        seeds.update(seed)
+    return seeds
+
+def get_seed(look, items):
+    look_profile = get_profile(look)
+    seed = []
+    for i in items:
+        if check(look_profile, i) == True:
+            seed.append(i)
+        else:
+            pass
+    return {str(look.name): seed}

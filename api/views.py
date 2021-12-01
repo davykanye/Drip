@@ -9,14 +9,18 @@ import json
 from wardrobe.models import *
 from .serializers import *
 from wardrobe.algorithm import *
+from wardrobe.ItemDetector import *
 # Create your views here.
 
 @api_view(['GET'])
 def AllClothes(request):
-    clothes = Photos.objects.filter(user=request.user)
-    data = ItemSerializer(clothes, many=True)
+    try:
+        clothes = Photos.objects.filter(user=request.user)
+        data = ItemSerializer(clothes, many=True)
 
-    return Response(data.data)
+        return Response(data.data)
+    except:
+        return Response('You are not authorized')
 
 # @api_view(['GET'])
 # def reccomend(request):
@@ -36,13 +40,25 @@ def detail(request, pk):
 def create_item(request):
     org = request.data
     image = search_item(org['image'])
-    data = org
-    data['image'] = image
+    data = org.copy()
+    data['image'] = image[0]
+    category = predict(data['term'])
 
-    item = ItemSerializer(data=data)
-    if item.is_valid(raise_exception=True):
-        item.save()
-    return Response(item.data)
+    try:
+        photo = Photos.objects.create(
+            user = request.user,
+            category = Category.objects.get(name=category),
+            description=data['description'],
+            image=data["image"],
+        )
+
+        photo.style.set(data['style'])
+        print('success')
+    except Exception as e:
+        print('Error is:', e)
+        return Response('Error is:' + str(e))
+
+    return Response("Success")
 
 @api_view(['GET'])
 def AllStyles(request):
@@ -74,9 +90,9 @@ def outfit_detail(request, pk):
 
     return Response(data.data)
 
-################ Reccomendations
+################ Reccomendations ###########
 @api_view(['GET'])
-def reccomend(request):
+def recomend(request):
     user = request.user
     items = Photos.objects.filter(user=user)
     ######### FIlTERING BY STYLES ##########

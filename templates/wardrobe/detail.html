@@ -31,7 +31,7 @@
     <div class="col-12 align-self-center" style="padding-top: 40px;">
       <div class="row">
         <div class="col-8" style="padding-right: 0px;padding-left: 0px;">
-          <h3><p>{{photo.description}}</p></h3>
+          <h3><span>{{photo.description}}</span> <span>{{photo.category.name}}</span></h3>
           {% for style in styles %}
             <p>{{style.name}}</p>
           {% empty %}
