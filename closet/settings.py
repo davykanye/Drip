@@ -155,7 +155,7 @@ STATICFILES_DIRS = [
 ]
 
 # CORS ORIGIN
-CORS_ORIGIN_WHITELIST = 'http://localhost:5000/',
+CORS_ORIGIN_WHITELIST = ('http://localhost:5000',)
 
 
 ############### PWA SECTION #################

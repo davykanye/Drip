@@ -3,6 +3,9 @@ from django.contrib import admin
 # Register your models here.
 from .models import *
 
+class TermAdmin(admin.ModelAdmin):
+    list_display = ['name', 'category']
+    list_filter = ['category']
 
 class OutfitAdmin(admin.ModelAdmin):
     pass
@@ -20,6 +23,7 @@ class FeedBackAdmin(admin.ModelAdmin):
 admin.site.register(Category)
 admin.site.register(Style)
 admin.site.register(Occassion)
+admin.site.register(Term, TermAdmin)
 admin.site.register(Photos, PhotosAdmin)
 admin.site.register(Outfit, OutfitAdmin)
 admin.site.register(Profile, ProfileAdmin)

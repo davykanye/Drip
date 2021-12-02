@@ -79,18 +79,9 @@ class FeedBack(models.Model):
         return self.user.username
 
 
+class Term(models.Model):
+    name = models.CharField(max_length=30, blank=True, null=True)
+    category = models.ForeignKey(Category, on_delete=models.SET_NULL, null=True, blank=False)
 
-# class Pizza(models.Model):
-#
-#     name = models.CharField(max_length=30, null=True)
-#     toppings = models.ManyToManyField('Topping', related_name='pizzas')
-#
-#     def __str__(self):
-#         return self.name
-#
-#
-# class Topping(models.Model):
-#     name = models.CharField(max_length=30, null=True)
-#
-#     def __str__(self):
-#         return self.name
+    def __str__(self):
+        return self.name
