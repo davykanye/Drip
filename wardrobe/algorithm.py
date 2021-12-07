@@ -119,7 +119,14 @@ def pick_seeds(items):
     for look in looks:
         seed = get_seed(look, items)
         seeds.update(seed)
-    return seeds
+    return split_dict(seeds)
+
+def split_dict(foo):
+    first = dict(list(foo.items())[len(foo)//2:])
+    second = dict(list(foo.items())[:len(foo)//2])
+    a = [first, second]
+    return random.choice(a)
+
 
 def get_seed(look, items):
     look_profile = get_profile(look)

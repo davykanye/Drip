@@ -10,6 +10,7 @@ from wardrobe.models import *
 from .serializers import *
 from wardrobe.algorithm import *
 from wardrobe.ItemDetector import *
+from wardrobe.scrapers import *
 # Create your views here.
 
 @api_view(['GET'])
@@ -90,17 +91,35 @@ def outfit_detail(request, pk):
 
     return Response(data.data)
 
+################## Scrapers ###############
+@api_view(['GET'])
+def Pinterest(request, search):
+    images = pinterest_scraper(search)
+    data = json.dumps(images)
+
+    return Response(data)
+
+@api_view(['GET'])
+def ItemScraper(request, search):
+    images = item_scraper(search)
+    data = json.dumps(images)
+
+    return Response(data)
+
+
 ################ Reccomendations ###########
 @api_view(['GET'])
-def recomend(request):
+def recommend(request):
     user = request.user
     items = Photos.objects.filter(user=user)
     ######### FIlTERING BY STYLES ##########
-    seed = 11
+    seeds = pick_seeds(items)
     outfits = []
-    for i in range(5):
+    for key, value in seeds.items():
+        seed =  random.choice(value).id
         outfit = make_outfit(seed, items)
+        outfit.update({"Occassion": key})
         outfits.append(outfit)
 
-    data = json.dumps(outfits)
-    return Response(data)
+    # data = ItemSerializer(outfits, many=True)
+    return Response(outfits)

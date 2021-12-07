@@ -185,10 +185,8 @@ def outfit_feed(request):
     seeds = pick_seeds(items)
     outfits = []
     for key, value in seeds.items():
-        print(key, '->', random.choice(value).id)
         seed =  random.choice(value).id
         outfit = make_outfit(seed, items)
-        outfit.update({"Occassion": key})
         outfits.append(outfit)
 
     time_taken = time.time() - start_time
