@@ -15,6 +15,7 @@ import requests
 from ast import literal_eval
 import random
 import time
+from wardrobe.scrapers import *
 from wardrobe.algorithm import *
 from sklearn.feature_extraction.text import CountVectorizer
 from sklearn.metrics.pairwise import cosine_similarity
@@ -213,46 +214,42 @@ def outfit_view(request):
 def search(request):
     if request.method == 'POST':
         query = request.POST['query']
-        query = '+'.join(query.split())
     else:
-        query = 'grey+shirt'
+        query = 'grey shirt'
 
-    GOOGLE_IMAGE = \
-    'https://www.google.com/search?site=&tbm=isch&source=hp&biw=1873&bih=990&'
+#     GOOGLE_IMAGE = \
+#     'https://www.google.com/search?site=&tbm=isch&source=hp&biw=1873&bih=990&'
 
-    usr_agent = {
-    'User-Agent': 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.11 (KHTML, like Gecko) Chrome/23.0.1271.64 Safari/537.11',
-    'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8',
-    'Accept-Charset': 'ISO-8859-1,utf-8;q=0.7,*;q=0.3',
-    'Accept-Encoding': 'none',
-    'Accept-Language': 'en-US,en;q=0.8',
-    'Connection': 'keep-alive',
-}
+#     usr_agent = {
+#     'User-Agent': 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.11 (KHTML, like Gecko) Chrome/23.0.1271.64 Safari/537.11',
+#     'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8',
+#     'Accept-Charset': 'ISO-8859-1,utf-8;q=0.7,*;q=0.3',
+#     'Accept-Encoding': 'none',
+#     'Accept-Language': 'en-US,en;q=0.8',
+#     'Connection': 'keep-alive',
+# }
 
 
-    search = GOOGLE_IMAGE + "q=" + query
-    html = requests.get(search, headers=usr_agent)
-    response = html.text
+#     search = GOOGLE_IMAGE + "q=" + query
+#     html = requests.get(search, headers=usr_agent)
+#     response = html.text
 
-    soup = BeautifulSoup(response, 'html.parser')
-    results = soup.find_all('img')
+#     soup = BeautifulSoup(response, 'html.parser')
+#     results = soup.find_all('img')
 
-    links = []
-    for img in results:
-        link = img['src']
-        links.append(link)
-    links.pop(0)
-
-    description = query.split('+')
-    description = ' '.join(description)
+#     links = []
+#     for img in results:
+#         link = img['src']
+#         links.append(link)
+#     links.pop(0)
 
     global proper
     def proper():
-        return description
+        return query
 
+    links = item_scraper(query)
 
-
-    context = {'images': links, 'query': description}
+    context = {'images': links, 'query': query}
     template_name = 'wardrobe/search.html'
 
     return render(request, template_name, context)

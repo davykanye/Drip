@@ -8,11 +8,11 @@ class ItemSerializer(serializers.ModelSerializer):
         fields = '__all__'
 
 
-class OutfitSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = Outfit
-        fields = '__all__'
-
+class OutfitSerializer(serializers.Serializer):
+    # headwear = ItemSerializer(many=False)
+    top = ItemSerializer(many=False)
+    lower = ItemSerializer(many=False)
+    shoes = ItemSerializer(many=False)
 
 class StyleSerializer(serializers.ModelSerializer):
     class Meta:

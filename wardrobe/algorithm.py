@@ -48,7 +48,7 @@ def outfit_template(items):
     shoes = items.filter(category__name='shoes')
 
     options = [{'headwear': get_ids(headwear),'top': get_ids(top), 'lower': get_ids(lower), 'shoes': get_ids(shoes)}, {'top': get_ids(top), 'lower': get_ids(lower), 'shoes': get_ids(shoes)}]
-    hashmap = random.choice(options)  #{'headwear': get_ids(headwear),'top': get_ids(top), 'lower': get_ids(lower), 'shoes': get_ids(shoes)}
+    hashmap = {'top': get_ids(top), 'lower': get_ids(lower), 'shoes': get_ids(shoes)}  #{'headwear': get_ids(headwear),'top': get_ids(top), 'lower': get_ids(lower), 'shoes': get_ids(shoes)}
 
     return hashmap
 

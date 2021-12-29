@@ -3,6 +3,13 @@ from django.contrib.auth.models import User
 from django.utils.safestring import mark_safe
 # Create your models here.
 
+class Gender(models.Model):
+    name = models.CharField(max_length=100, blank=False, null=False)
+    categories = models.ManyToManyField('Category', related_name='categories')
+
+    def __str__(self):
+        return self.name
+
 class Category(models.Model):
     name = models.CharField(max_length=100, blank=False, null=False)
 
@@ -12,6 +19,7 @@ class Category(models.Model):
 class Profile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE, primary_key=True)
     image = models.ImageField(null=True, blank=True)
+    gender = models.ForeignKey(Gender, on_delete=models.CASCADE, related_name='gender', null=True)
 
     def __str__(self):
         return self.user.username

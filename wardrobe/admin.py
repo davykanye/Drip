@@ -10,6 +10,9 @@ class TermAdmin(admin.ModelAdmin):
 class OutfitAdmin(admin.ModelAdmin):
     pass
 
+class GenderAdmin(admin.ModelAdmin):
+    pass
+
 class PhotosAdmin(admin.ModelAdmin):
     list_display = ['admin_photo', 'user','description', 'category',]
     list_filter = ['user', 'style', 'category']
@@ -23,6 +26,7 @@ class FeedBackAdmin(admin.ModelAdmin):
 admin.site.register(Category)
 admin.site.register(Style)
 admin.site.register(Occassion)
+admin.site.register(Gender, GenderAdmin)
 admin.site.register(Term, TermAdmin)
 admin.site.register(Photos, PhotosAdmin)
 admin.site.register(Outfit, OutfitAdmin)

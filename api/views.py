@@ -5,6 +5,7 @@ from rest_framework.decorators import api_view
 from rest_framework.response import Response
 from wardrobe.functions import *
 import json
+import asyncio
 
 from wardrobe.models import *
 from .serializers import *
@@ -12,6 +13,30 @@ from wardrobe.algorithm import *
 from wardrobe.ItemDetector import *
 from wardrobe.scrapers import *
 # Create your views here.
+
+@api_view(['POST'])
+def SignUp(request):
+    message = ''
+    if request.method == 'POST':
+        data = request.data
+        username = data['username']
+        email = data['email']
+        password = data['password1']
+
+        if data['password1'] == data['password2']:
+            if User.objects.filter(username=username).exists():
+                message = 'username taken'
+            elif User.objects.filter(email=email).exists():
+                message = 'Email taken'
+            else:
+                user = User.objects.create_user(username=username, email=email, password=password,)
+                user.save()
+                message = "Successful"
+        else:
+            message = 'passwords are not matching'
+
+    return Response(message)
+
 
 @api_view(['GET'])
 def AllClothes(request):
@@ -94,10 +119,29 @@ def outfit_detail(request, pk):
 ################## Scrapers ###############
 @api_view(['GET'])
 def Pinterest(request, search):
-    images = pinterest_scraper(search)
-    data = json.dumps(images)
+    import threading
+    loop = asyncio.new_event_loop()
+    try:
+        asyncio.set_event_loop(loop)
+        images = pinterest_scraper(search)
+    except Exception as e:
+        print("Error:", e)
+    finally:
+        images = pinterest_scraper(search)
+        data = json.dumps(images)
 
-    return Response(data)
+    # c = threading.current_thread()
+    # main = threading.main_thread()
+    # print("Current Thread:", c.name)
+    # print(c)
+    # print("Main Thread:", main.name)
+    # print(main)
+
+    # if c.name != main.name:
+    #     out = "It can't work"
+    # else:
+    #     out = "It can work"
+    return Response(images)
 
 @api_view(['GET'])
 def ItemScraper(request, search):
@@ -118,8 +162,8 @@ def recommend(request):
     for key, value in seeds.items():
         seed =  random.choice(value).id
         outfit = make_outfit(seed, items)
-        outfit.update({"Occassion": key})
+        # outfit.update({"Occassion": key})
         outfits.append(outfit)
 
-    # data = ItemSerializer(outfits, many=True)
-    return Response(outfits)
+    data = OutfitSerializer(outfits, many=True)
+    return Response(data.data)
