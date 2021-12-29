@@ -156,7 +156,7 @@ STATICFILES_DIRS = [
 ]
 
 # CORS ORIGIN
-CORS_ORIGIN_WHITELIST = ('http://localhost:5000',)
+CORS_ORIGIN_WHITELIST = ('http://localhost:3000',)
 
 # JWT SETTINGS
 
