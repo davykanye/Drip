@@ -152,20 +152,22 @@ def ItemScraper(request, search):
 
     return Response(data)
 
-
 ################ Reccomendations ###########
 @api_view(['GET'])
 def recommend(request):
     user = request.user
     items = Photos.objects.filter(user=user)
     ######### FIlTERING BY STYLES ##########
-    seeds = pick_seeds(items)
-    outfits = []
-    for key, value in seeds.items():
-        seed =  random.choice(value).id
-        outfit = make_outfit(seed, items)
-        # outfit.update({"Occassion": key})
-        outfits.append(outfit)
+    try:
+        seeds = pick_seeds(items)
+        outfits = []
+        for key, value in seeds.items():
+            seed =  random.choice(value).id
+            outfit = make_outfit(seed, items)
+            # outfit.update({"Occassion": key})
+            outfits.append(outfit)
 
-    data = OutfitSerializer(outfits, many=True)
-    return Response(data.data)
+        data = OutfitSerializer(outfits, many=True)
+        return Response(data.data)
+    except IndexError:
+        return Response("ADD MORE ITEMS")
