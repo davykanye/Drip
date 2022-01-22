@@ -121,28 +121,11 @@ def outfit_detail(request, pk):
 ################## Scrapers ###############
 @api_view(['GET'])
 def Pinterest(request, search):
-    import threading
-    loop = asyncio.new_event_loop()
-    try:
-        asyncio.set_event_loop(loop)
-        images = pinterest_scraper(search)
-    except Exception as e:
-        print("Error:", e)
-    finally:
-        images = pinterest_scraper(search)
-        data = json.dumps(images)
+    start = time.time()
+    images = pinterest_scraper(search)
 
-    # c = threading.current_thread()
-    # main = threading.main_thread()
-    # print("Current Thread:", c.name)
-    # print(c)
-    # print("Main Thread:", main.name)
-    # print(main)
-
-    # if c.name != main.name:
-    #     out = "It can't work"
-    # else:
-    #     out = "It can work"
+    time_taken = time.time() - start
+    print(time_taken)
     return Response(images)
 
 @api_view(['GET'])

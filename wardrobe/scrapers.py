@@ -1,29 +1,31 @@
 import random
 import time
-import asyncio
+from selenium import webdriver
+from selenium.webdriver.chrome.options import Options
+from webdriver_manager.chrome import ChromeDriverManager
 import requests
 from bs4 import BeautifulSoup
-from requests_html import AsyncHTMLSession, HTMLSession
+
 
 def pinterest_scraper(search):
-    session = HTMLSession()
-    r = session.get("https://in.pinterest.com/search/pins/?q=" + search)
-    r.html.render(timeout=20, sleep=10, keep_page=True, scrolldown=1)
-
-    soup = BeautifulSoup(r.html.raw_html, 'html.parser')
+    options = Options()
+    options.headless = True
+    driver = webdriver.Chrome("wardrobe\chromedriver.exe", options=options)
+    driver.get("https://in.pinterest.com/search/pins/?q=" + search)
+    links = []
+    soup = BeautifulSoup(driver.page_source, 'html.parser')
 
     pics = soup.find_all('img')
 
-    links = []
     for img in pics:
         link = img['src']
         links.append(link)
 
     if links == []:
         print('life be like yam')
-
-    # r.close()
-    # session.close()
+    else:
+        print(links[:4])
+        print(len(links))
 
     return {str(search): links}
 
@@ -33,7 +35,6 @@ def item_scraper(search):
     search = '+'.join(search.split())
     url = domain + search
     
-
     html = requests.get(url)
     response = html.text
     soup = BeautifulSoup(response, 'html.parser')
