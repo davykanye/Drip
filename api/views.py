@@ -153,4 +153,5 @@ def recommend(request):
         data = OutfitSerializer(outfits, many=True)
         return Response(data.data)
     except IndexError:
-        return Response("ADD MORE ITEMS")
+        y = []
+        return Response(y)
