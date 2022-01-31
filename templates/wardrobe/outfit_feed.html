@@ -7,7 +7,7 @@
   </head>
   <body>
     <h1><marquee>This feature is under construction</marquee></h1>
-    {% for outfit in outfits %}
+    {% if athlete_list %}
     <center>
       <div class="row" style="margin-bottom:10px">
         {% for key,value in outfit.items %}
@@ -18,9 +18,10 @@
         {% endfor %}
       </div>
     </center>
-    {% empty %}
-      <h3>Not possible</h3>
-    {% endfor %}
+    {% else %}
+      <center><h2>No outfits</h2></center>
+    {% endif %}
 
+    
   </body>
 </html>

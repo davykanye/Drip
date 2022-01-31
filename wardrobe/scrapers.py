@@ -8,10 +8,15 @@ from bs4 import BeautifulSoup
 
 
 def pinterest_scraper(search):
+    search = str(search)
+    search = '+'.join(search.split())
     options = Options()
     options.headless = True
-    driver = webdriver.Chrome("wardrobe\chromedriver.exe", options=options)
+    driver = webdriver.Chrome("wardrobe/chromedriver.exe", options=options)
     driver.get("https://in.pinterest.com/search/pins/?q=" + search)
+    for i in range(7):
+        driver.execute_script("window.scrollTo(0, document.body.scrollHeight);")
+        time.sleep(5)
     links = []
     soup = BeautifulSoup(driver.page_source, 'html.parser')
 
@@ -27,7 +32,7 @@ def pinterest_scraper(search):
         print(links[:4])
         print(len(links))
 
-    return {str(search): links}
+    return links
 
 def item_scraper(search):
     domain = 'https://www.pngegg.com/en/search?q='

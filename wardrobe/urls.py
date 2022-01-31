@@ -6,6 +6,7 @@ urlpatterns = [
     path('add/', views.add_pic, name='add_pic'),
     path('photo/<str:pk>/', views.detail, name='photo'),
     path('update/<str:pk>/', views.edit_pic, name='edit_pic'),
+    path('gather/', views.gather_pins, name='gather'),
     path('delete/<str:pk>/', views.delete, name='delete'),
     path('outfit/', views.create_outfit, name='create_outfit'),
     path('outfit_feed/', views.outfit_feed, name='outfit_feed'),

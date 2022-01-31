@@ -21,19 +21,20 @@ def SignUp(request):
     message = ''
     if request.method == 'POST':
         data = request.data
-        username = data['username']
-        email = data['email']
-        password = data['password1']
 
         if data['password1'] == data['password2']:
-            if User.objects.filter(username=username).exists():
+            if User.objects.filter(username=data["username"]).exists():
                 message = 'username taken'
-            elif User.objects.filter(email=email).exists():
+            elif User.objects.filter(email=data["email"]).exists():
                 message = 'Email taken'
             else:
-                user = User.objects.create_user(username=username, email=email, password=password,)
-                user.save()
-                message = "Successful"
+                data["password"] = data["password2"]
+                data.pop("password1")
+                data.pop("password2")
+                user = RegisterSerializer(data=data)
+                if user.is_valid():
+                    user.save()
+                    message = "Successful"
         else:
             message = 'passwords are not matching'
 
@@ -122,7 +123,6 @@ def outfit_detail(request, pk):
 @api_view(['GET'])
 def Pinterest(request, search):
     start = time.time()
-    images = pinterest_scraper(search)
 
     time_taken = time.time() - start
     print(time_taken)

@@ -3,6 +3,7 @@ from wardrobe.models import *
 from django.shortcuts import (get_object_or_404, HttpResponseRedirect)
 from django.contrib.auth.decorators import login_required
 from django.urls import reverse
+from django.contrib import messages
 from django.core.exceptions import ObjectDoesNotExist
 ###########################################
 import os
@@ -25,9 +26,7 @@ from sklearn.metrics.pairwise import cosine_similarity
 def gallery(request):
     start = time.time()
     user = request.user
-    pro = Profile.objects.get(user=request.user)
 
-    profile = pro.picture()
     categories = Category.objects.all()
     photos = Photos.objects.filter(user=user)
 
@@ -41,7 +40,7 @@ def gallery(request):
 
     outfits = Outfit.objects.filter(user=user)
 
-    context = {'categories': categories, 'photos': photos, 'outfits': outfits, 'user': user, 'profile': profile}
+    context = {'categories': categories, 'photos': photos, 'outfits': outfits, 'user': user}
     template_name = 'wardrobe/wardrobe.html'
     end = time.time()
     time_taken = end - start
@@ -73,6 +72,27 @@ def add_pic(request):
 
     context = {'categories': categories, 'styles': styles}
     template_name = 'wardrobe/add_pic.html'
+    return render(request, template_name, context)
+
+# Gathering Pins
+@login_required
+def gather_pins(request):
+    fashion = Inspiration.objects.all()
+    if request.method == 'POST':
+        start = time.time()
+        data = request.POST
+        if fashion.filter(name=data["Inspiration"]).exists():
+            messages.info(request, "Already done this")
+        else:
+            I = Inspiration.objects.create(name=data["Inspiration"])
+            pins = pinterest_scraper(data["Inspiration"])
+            for pin in pins:
+                Pin.objects.create(image=pin, Inspiration=I)
+            time_taken = time.time() - start    
+            messages.info(request, "Success" + "|"+ str(time_taken))
+
+    context = {"fashion": fashion}
+    template_name = 'wardrobe/Gather.html'
     return render(request, template_name, context)
 
 # viewing clothe items
@@ -183,17 +203,11 @@ def outfit_feed(request):
     user = request.user
     items = Photos.objects.filter(user=user)
     ######### FIlTERING BY STYLES ##########
-    seeds = pick_seeds(items)
-    outfits = []
-    for key, value in seeds.items():
-        seed =  random.choice(value).id
-        outfit = make_outfit(seed, items)
-        outfits.append(outfit)
+    seed = pick_seeds(items)
+    outfit = make_outfit(seed[0], items)
 
     time_taken = time.time() - start_time
-    #
-    print('The outfits of the day is', outfits)
-    # print(seeds)
+    print('The outfit of the day is', outfit)
     print(time_taken)
 
     context = {}
@@ -253,6 +267,8 @@ def search(request):
     template_name = 'wardrobe/search.html'
 
     return render(request, template_name, context)
+
+
 
 @login_required
 def search_item(request, image):

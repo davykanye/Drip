@@ -23,6 +23,9 @@ class ProfileAdmin(admin.ModelAdmin):
 class FeedBackAdmin(admin.ModelAdmin):
     list_display = ['user', 'rating', 'message']
 
+class PinAdmin(admin.ModelAdmin):
+    list_display = ['image', 'Inspiration']    
+
 admin.site.register(Category)
 admin.site.register(Style)
 admin.site.register(Occassion)
@@ -32,4 +35,6 @@ admin.site.register(Photos, PhotosAdmin)
 admin.site.register(Outfit, OutfitAdmin)
 admin.site.register(Profile, ProfileAdmin)
 admin.site.register(FeedBack, FeedBackAdmin)
+admin.site.register(Inspiration)
+admin.site.register(Pin, PinAdmin)
 # admin.site.register(Topping)

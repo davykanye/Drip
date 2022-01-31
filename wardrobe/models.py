@@ -93,3 +93,16 @@ class Term(models.Model):
 
     def __str__(self):
         return self.name
+
+class Inspiration(models.Model):
+    name = models.CharField(max_length=30, blank=False, null=False)
+
+    def __str__(self):
+        return self.name
+
+class Pin(models.Model):
+    image = models.CharField(max_length=500, blank=False, null=False)
+    Inspiration = models.ForeignKey(Inspiration, on_delete=models.SET_NULL, null=True, blank=False)
+
+    def __str__(self):
+        return self.image
