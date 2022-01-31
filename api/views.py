@@ -121,12 +121,14 @@ def outfit_detail(request, pk):
 
 ################## Scrapers ###############
 @api_view(['GET'])
-def Pinterest(request, search):
+def discover(request):
     start = time.time()
+
+
 
     time_taken = time.time() - start
     print(time_taken)
-    return Response(images)
+    return Response(data)
 
 @api_view(['GET'])
 def ItemScraper(request, search):

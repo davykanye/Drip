@@ -12,11 +12,11 @@ def pinterest_scraper(search):
     search = '+'.join(search.split())
     options = Options()
     options.headless = True
-    driver = webdriver.Chrome("wardrobe/chromedriver.exe", options=options)
+    driver = webdriver.Chrome(ChromeDriverManager().install(), options=options)
     driver.get("https://in.pinterest.com/search/pins/?q=" + search)
     for i in range(7):
         driver.execute_script("window.scrollTo(0, document.body.scrollHeight);")
-        time.sleep(5)
+        time.sleep(2)
     links = []
     soup = BeautifulSoup(driver.page_source, 'html.parser')
 

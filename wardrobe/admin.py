@@ -24,7 +24,8 @@ class FeedBackAdmin(admin.ModelAdmin):
     list_display = ['user', 'rating', 'message']
 
 class PinAdmin(admin.ModelAdmin):
-    list_display = ['image', 'Inspiration']    
+    list_display = ['image', 'Inspiration']
+    list_filter = ['Inspiration']
 
 admin.site.register(Category)
 admin.site.register(Style)

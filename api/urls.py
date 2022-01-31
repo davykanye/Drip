@@ -13,7 +13,7 @@ urlpatterns = [
     path('item/<str:pk>/', views.detail, name='detail'), ###
     path('create_item/', views.create_item, name='create'), ###
     path('outfit/<str:pk>/', views.outfit_detail, name='outfit_detail'), ###
-    path('pinterest/<slug:search>/', views.Pinterest, name="pinterest"), 
+    path('pinterest/<slug:search>/', views.discover, name="pinterest"), 
     path('ItemScraper/<slug:search>/', views.ItemScraper, name='ItemScraper'),
     path('recommendations/', views.recommend, name='recommendations')
  

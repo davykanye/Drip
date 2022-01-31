@@ -20,6 +20,7 @@ class Profile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE, primary_key=True)
     image = models.ImageField(null=True, blank=True)
     gender = models.ForeignKey(Gender, on_delete=models.CASCADE, related_name='gender', null=True)
+    inspiration = models.ManyToManyField('Inspiration', related_name='Inspiration')
 
     def __str__(self):
         return self.user.username
