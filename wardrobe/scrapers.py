@@ -13,6 +13,7 @@ def pinterest_scraper(search):
     search = '+'.join(search.split())
     options = Options()
     options.headless = True
+    options.add_argument('--disable-dev-shm-usage')
     driver = webdriver.Chrome(ChromeDriverManager().install(), options=options)
     driver.get("https://in.pinterest.com/search/pins/?q=" + search)
     for i in range(7):
