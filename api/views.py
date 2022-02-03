@@ -123,9 +123,10 @@ def outfit_detail(request, pk):
 @api_view(['GET'])
 def discover(request):
     start = time.time()
-
-
-
+    I = get_interest(request.user)
+    pins = Pin.objects.filter(Inspiration=I)
+    final = [i.image for i in pins]
+    data = {str(I.name): final}
     time_taken = time.time() - start
     print(time_taken)
     return Response(data)

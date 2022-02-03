@@ -25,6 +25,10 @@ class Profile(models.Model):
     def __str__(self):
         return self.user.username
 
+    @property
+    def inspirations(self):
+        return self.inspiration.all()    
+
     def picture(self):
         return self.image.url
 

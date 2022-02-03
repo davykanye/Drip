@@ -4,6 +4,12 @@ from sklearn.feature_extraction.text import CountVectorizer
 from sklearn.metrics.pairwise import cosine_similarity
 from wardrobe.models import *
 
+def get_interest(user):
+    i = Profile.objects.get(user=user)
+    data = i.inspirations
+
+    return random.choice(data)
+
 def extract(photo):
     return photo.styles
 
